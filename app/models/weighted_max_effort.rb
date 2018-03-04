@@ -1,0 +1,2 @@
+class WeightedMaxEffort < ApplicationRecord
+end
