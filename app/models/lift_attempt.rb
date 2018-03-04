@@ -2,7 +2,6 @@ class LiftAttempt
   WEIGHT_JUMP = 5
   attr_reader :attempt, :weight, :result
 
-
   def initialize(attempt:, weight:, result: nil)
     @attempt = attempt
     @weight = weight
@@ -21,6 +20,6 @@ class LiftAttempt
 
   private
     def generate_random_result
-      LiftResult.new(attempt)
+      LiftResult.new(attempt: attempt)
     end
 end

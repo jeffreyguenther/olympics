@@ -35,4 +35,14 @@ class LiftAttemptTest < ActiveSupport::TestCase
 
     assert_equal attempt.next_weight, attempted_weight
   end
+
+  test "result of attempt is random" do
+    attempt_num = 0
+    attempted_weight = 100
+    attempt = LiftAttempt.new(attempt: attempt_num, weight: attempted_weight)
+
+    expected_range = (0..3)
+
+    assert_includes expected_range, attempt.result.result
+  end
 end
