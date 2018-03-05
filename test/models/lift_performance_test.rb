@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class OlympicPerformanceTest < ActiveSupport::TestCase
+class LiftPerformanceTest < ActiveSupport::TestCase
   test "#results after three attempts" do
-    performance = OlympicPerformance.new(starting_weight: 100)
+    performance = LiftPerformance.new(starting_weight: 100)
     performance.generate
 
     assert performance.results.count, 3

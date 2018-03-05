@@ -1,4 +1,4 @@
-class OlympicPerformance
+class LiftPerformance
   attr_reader :results
 
   def initialize(starting_weight:)
