@@ -1,4 +1,4 @@
-module Roundable
+module Openable
   extend ActiveSupport::Concern
 
   class_methods do

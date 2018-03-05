@@ -1,6 +1,6 @@
 class PowerliftingMeet
-  include Roundable
-  
+  include Openable
+
   def self.movements
     ["squat", "bench", "deadlift"]
   end

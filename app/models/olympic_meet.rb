@@ -1,5 +1,5 @@
 class OlympicMeet
-  include Roundable
+  include Openable
 
   def self.movements
     ["snatch", "clean & jerk"]
