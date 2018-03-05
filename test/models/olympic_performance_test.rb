@@ -11,7 +11,7 @@ class OlympicPerformanceTest < ActiveSupport::TestCase
     if first.success?
       assert second.weight > first.weight
     else
-      assert_equals second.weight, first.weight
+      assert_equal second.weight, first.weight
     end
   end
 end
