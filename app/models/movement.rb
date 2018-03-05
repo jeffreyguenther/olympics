@@ -9,7 +9,5 @@
 #
 
 class Movement < ApplicationRecord
-  belongs_to :weighted_max_effort
-
   has_many :attempts
 end

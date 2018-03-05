@@ -12,5 +12,5 @@
 class WeightedMaxEffort < ApplicationRecord
   enum lifts: { olympic: 0, power: 1}
 
-  has_many :movements
+  has_many :attempts
 end
