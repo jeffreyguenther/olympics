@@ -21,8 +21,8 @@ class LiftResult
 
   private
     def generate_random_result
-      prng = Random.new
-      prng.rand(0..3)
+      @@prng ||= Random.new
+      @@prng.rand(0..3)
     end
 
     def make_first_attempt
