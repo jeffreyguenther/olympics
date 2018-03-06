@@ -36,16 +36,15 @@ end
 
 def create_weight_lifting_meet_records_as_csv(athletes, results)
   meet = WeightedMaxEffort.create(lifts: "olympic")
-  CSV.open("#{Rails.root}/import.csv", "ab") do |csv|
-    athletes.each do |athlete|
-
-      movement_results = results[athlete]
-      movement_results.each_pair do |name, movement|
-        movement.results.each do |attempt|
-          csv << [attempt.weight, athlete.athlete.id, @movements[name].id, "now()", "now()", meet.id, attempt.success?]
+  athletes.each do |athlete|
+    movement_results = results[athlete]
+    movement_results.each_pair do |name, movement|
+      movement.results.each do |attempt|
+        @pgconn.copy_data("COPY attempts (weight, athlete_id, movement_id, created_at, updated_at, weighted_max_effort_id, success) FROM STDIN", @enco) do
+          @pgconn.put_copy_data([attempt.weight, athlete.athlete.id, @movements[name].id, Time.now.to_s, Time.now.to_s, meet.id, attempt.success?])
         end
       end
-    end
+  end
   end
 
   meet
@@ -65,11 +64,12 @@ athletes = Athlete.all.map{ |a| AthleteWithRecords.new(a)}
 
 # Generate random match type
 # Generate match
-FileUtils.rm "#{Rails.root}/import.csv"
+# FileUtils.rm "#{Rails.root}/import.csv"
 time_to_run = Benchmark.ms do
-  pgconn = Attempt.connection.raw_connection
+  @pgconn = Attempt.connection.raw_connection
+  @enco = PG::TextEncoder::CopyRow.new
 
-  meets = 1_000_000.times.map do
+  meets = 1_000.times.map do
     meet = WeightLiftingMeet.new(type: OlympicMeet, athletes: athletes)
     meet.generate
 
@@ -77,15 +77,16 @@ time_to_run = Benchmark.ms do
   end
   # WeightedMaxEffort.import(meets, recursive: true)
 
-  pgconn.copy_data("COPY attempts (weight, athlete_id, movement_id, created_at, updated_at, weighted_max_effort_id, success) FROM STDIN CSV") do
-    File.open("#{Rails.root}/import.csv") do |fd|
-      while data=fd.read(100000)
-        pgconn.put_copy_data data
-      end
-    end
-  end
+  # pgconn.copy_data("COPY attempts (weight, athlete_id, movement_id, created_at, updated_at, weighted_max_effort_id, success) FROM STDIN CSV") do
+  #   File.open("#{Rails.root}/import.csv") do |fd|
+  #     while data=fd.read(100000)
+  #       pgconn.put_copy_data data
+  #     end
+  #   end
+  # end
 end
 puts "Time: #{time_to_run}"
+puts WeightedMaxEffort.count
 
 # 4Ghz Core i7 - Late 2015, High Sierra
 # 32 GB 1867 MHz DDR3
@@ -101,8 +102,9 @@ puts "Time: #{time_to_run}"
 # Export - 1_000 Time: 2353.592999999819
 # Export - 100_000 264208.20199999795
 
-# Combined - 100 Time: 239.45499999899766
-# Combined - 1000 Time: 2789.6599999949103
-# Combined - 10_000 Time: 30802.232999998523
-# Combined - 100_000 Time: 23962.82699999938
-# Combined - 1_000_000
+# Export to CSV and then Import via COPY FROM
+# Combined - 100 Time:             239.45499999899766
+# Combined - 1_000 Time:          2143.2869999989634
+# In Memory - 1_000 Time:         7224.332999998296
+# Combined - 10_000 Time:        22473.47200000513
+# Combined - 100_000 Time:      241830.86600000388
