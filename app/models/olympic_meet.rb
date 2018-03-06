@@ -2,7 +2,7 @@ class OlympicMeet
   include Openable
 
   def self.movements
-    ["snatch", "clean & jerk"]
+    ["snatch", "clean and jerk"]
   end
 
   def self.starting_snatch_weight
