@@ -22,9 +22,10 @@ generate the statement.
 approach, postgres provides a method specially designed for importing data. It
 supports importing data from CSV files.
 
-To discover the best way to import the data required by this project, I conducted
-a small experiment. I benchmarked how long it took to import records using each
-of these techniques. Unsurprisingly, using `COPY FROM` is the fastest.
+To discover the best way to import the data required by this project, I
+conducted a small experiment. I benchmarked how long it took to import records
+using each of these techniques. Unsurprisingly, using `COPY FROM` is the
+fastest.
 
 Here's a description of the strategy:
 
@@ -47,6 +48,11 @@ as it's generated.
 5. Use `COPY FROM` to stream the data from the CSV (containing 36 M lines) to
 the database.
 
+6. Add indices after the import. If you add them before hand, [they are updated
+as the data is
+streamed](https://www.postgresql.org/docs/9.6/static/populate.html) in and this
+makes the import slower.
+
 Using a system with the specs:
 
 * 4Ghz Core i7 - Late 2015, High Sierra
@@ -59,4 +65,7 @@ Using a system with the specs:
 | 10_000         | 21733          |
 | 100_000        | 247384         |
 | 1_000_000      | 3161999        |
-These results show that it takes 00:52:41 to import the million weightlifting events (37 million records)
+
+These results show that it takes 00:52:41 to import the million weightlifting
+events (37 million records). This works out to 37000000 / 3161999ms &cong; 11ms per
+record.
