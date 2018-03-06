@@ -16,4 +16,14 @@ class PowerliftingMeet
   def self.starting_deadlift_weight
     generate_rounded_weight_between(185..315)
   end
+
+  def self.random_opening_weight(movement)
+    if movement == "squat"
+      starting_squat_weight
+    elsif movement == "bench"
+      starting_bench_weight
+    elsif movement == "deadlift"
+      starting_deadlift_weight
+    end
+  end
 end

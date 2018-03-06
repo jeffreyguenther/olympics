@@ -12,3 +12,8 @@ Movement.create(name: "bench")
 Movement.create(name: "deadlift")
 Movement.create(name: "clean & jerk")
 Movement.create(name: "snatch")
+
+Athlete.create(name: "Sam Strong")
+Athlete.create(name: "Wally Wobbles")
+Athlete.create(name: "Junior Jumps")
+Athlete.create(name: "Peter Power")

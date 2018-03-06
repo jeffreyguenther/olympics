@@ -15,4 +15,8 @@ class LiftPerformance
       @results.push(attempt)
     end
   end
+
+  def store
+    @results.map(&:store)
+  end
 end

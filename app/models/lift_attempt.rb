@@ -18,6 +18,10 @@ class LiftAttempt
     end
   end
 
+  def store
+    Attempt.new(weight: @weight, success: success?)
+  end
+
   private
     def generate_random_result
       LiftResult.new(attempt: attempt)
