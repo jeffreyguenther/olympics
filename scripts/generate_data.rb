@@ -65,7 +65,7 @@ athletes = Athlete.all.map{ |a| AthleteWithRecords.new(a)}
 
 # Generate random match type
 # Generate match
-FileUtils.rm "#{Rails.root}/import.csv"
+FileUtils.rm "#{Rails.root}/import.csv", force: true
 time_to_run = Benchmark.ms do
   pgconn = Attempt.connection.raw_connection
 
@@ -101,8 +101,8 @@ puts "Time: #{time_to_run}"
 # Export - 1_000 Time: 2353.592999999819
 # Export - 100_000 264208.20199999795
 
-# Combined - 100 Time: 239.45499999899766
-# Combined - 1000 Time: 2789.6599999949103
-# Combined - 10_000 Time: 30802.232999998523
-# Combined - 100_000 Time: 23962.82699999938
-# Combined - 1_000_000
+# Combined - 100 Time:                        239.45499999899766
+# Combined - 1000 Time:                      2738.02699999942
+# Combined - 10_000 Time:                   21733.110000001034
+# Combined - 100_000 Time:                 247384.2880000011
+# Combined - 1_000_000 Time:              3161999.029999999
