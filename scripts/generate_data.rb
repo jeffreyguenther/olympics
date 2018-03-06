@@ -36,7 +36,7 @@ end
 
 def create_weight_lifting_meet_records_as_csv(athletes, results)
   meet = WeightedMaxEffort.create(lifts: "olympic")
-  CSV.open("#{Rails.root}/import.csv", "wb") do |csv|
+  CSV.open("#{Rails.root}/import.csv", "ab") do |csv|
     athletes.each do |athlete|
 
       movement_results = results[athlete]
@@ -65,7 +65,7 @@ athletes = Athlete.all.map{ |a| AthleteWithRecords.new(a)}
 
 # Generate random match type
 # Generate match
-
+FileUtils.rm "#{Rails.root}/import.csv"
 time_to_run = Benchmark.ms do
   pgconn = Attempt.connection.raw_connection
 
@@ -102,6 +102,7 @@ puts "Time: #{time_to_run}"
 # Export - 100_000 264208.20199999795
 
 # Combined - 100 Time: 239.45499999899766
+# Combined - 1000 Time: 2789.6599999949103
 # Combined - 10_000 Time: 30802.232999998523
 # Combined - 100_000 Time: 23962.82699999938
 # Combined - 1_000_000
