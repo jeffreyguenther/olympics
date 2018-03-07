@@ -3,7 +3,6 @@ require 'test_helper'
 class LiftPerformanceTest < ActiveSupport::TestCase
   test "#results after three attempts" do
     performance = LiftPerformance.new(starting_weight: 100)
-    performance.generate
 
     assert performance.results.count, 3
 

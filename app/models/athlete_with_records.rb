@@ -18,7 +18,7 @@ class AthleteWithRecords
       .max
 
     current_max = @records[movement]
-    if @current_max.blank? || current_max < performance_max
+    if current_max.blank? || current_max < performance_max
       @records[movement] = performance_max
     end
   end
