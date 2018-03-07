@@ -7,10 +7,10 @@ class PowerliftingMeetTest < ActiveSupport::TestCase
     assert_equal PowerliftingMeet.movements, expected_movements
   end
 
-  test "generate starting squat" do
+  test "generate starting squat weight" do
     expected_range = 135..205
 
-    weight = PowerliftingMeet.starting_squat_weight
+    weight = PowerliftingMeet.opening_squat_weight
 
     assert_includes expected_range, weight
     assert_equal weight % 5, 0
@@ -19,7 +19,7 @@ class PowerliftingMeetTest < ActiveSupport::TestCase
   test "generate starting bench weight" do
     expected_range = 100..225
 
-    weight = PowerliftingMeet.starting_bench_weight
+    weight = PowerliftingMeet.opening_bench_weight
 
     assert_includes expected_range, weight
     assert_equal weight % 5, 0
@@ -28,7 +28,34 @@ class PowerliftingMeetTest < ActiveSupport::TestCase
   test "generate starting deadlift weight" do
     expected_range = 185..315
 
-    weight = PowerliftingMeet.starting_deadlift_weight
+    weight = PowerliftingMeet.opening_deadlift_weight
+
+    assert_includes expected_range, weight
+    assert_equal weight % 5, 0
+  end
+
+  test "generate random opening weight for squat" do
+    expected_range = 135..205
+
+    weight = PowerliftingMeet.opening_weight_for("squat")
+
+    assert_includes expected_range, weight
+    assert_equal weight % 5, 0
+  end
+
+  test "generate random opening weight for bench weight" do
+    expected_range = 100..225
+
+    weight = PowerliftingMeet.opening_weight_for("bench")
+
+    assert_includes expected_range, weight
+    assert_equal weight % 5, 0
+  end
+
+  test "generate random opening weight for deadlift weight" do
+    expected_range = 185..315
+
+    weight = PowerliftingMeet.opening_weight_for("deadlift")
 
     assert_includes expected_range, weight
     assert_equal weight % 5, 0
