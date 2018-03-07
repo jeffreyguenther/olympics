@@ -16,6 +16,17 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     assert_equal expected_opening_weight, athlete.opening_weight(nil, "jump")
   end
 
+  test "returns random starting weight if record is 0" do
+    previous = { "snatch" => 0 }
+    expected_range = (100..185)
+    athlete = AthleteWithRecords.new(nil, previous)
+
+    opening = athlete.opening_weight(OlympicMeet, "snatch")
+
+    assert_not_equal 0, opening
+    assert_equal 0, opening % 5
+  end
+
   test "generates random opening weight for movement" do
     expected_range = (100..185)
     with_records = AthleteWithRecords.new(nil)

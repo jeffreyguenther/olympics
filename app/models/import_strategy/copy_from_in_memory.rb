@@ -15,6 +15,7 @@ class ImportStrategy::CopyFromInMemory
       @events.times do
         @meet_results = WeightLiftingMeet.new(type: OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
+
         stream_athletes(meet)
       end
     end
@@ -32,7 +33,7 @@ class ImportStrategy::CopyFromInMemory
 
   private
     def build_meet(type)
-      WeightedMaxEffort.new(lifts: type)
+      WeightedMaxEffort.create(lifts: type)
     end
 
     def stream_athletes(meet)

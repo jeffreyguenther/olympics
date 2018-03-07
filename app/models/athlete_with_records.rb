@@ -9,10 +9,10 @@ class AthleteWithRecords
 
   def opening_weight(meet_type, movement)
     current_max = @records[movement]
-    if current_max.blank?
+    if current_max.blank? || current_max <= 0
       meet_type.opening_weight_for(movement)
     else
-       current_max - 10
+      current_max - 10
     end
   end
 
