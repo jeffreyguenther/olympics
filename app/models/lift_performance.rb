@@ -6,6 +6,10 @@ class LiftPerformance
     @results = attempts || generate_random_attempts
   end
 
+  def best_weight
+    results.select{ |r| r.success? }.map { |r| r.weight }.max || 0
+  end
+
   private
     def generate_random_attempts
       current_weight = @starting_weight

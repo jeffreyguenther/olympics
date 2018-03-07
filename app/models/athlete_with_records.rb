@@ -17,10 +17,7 @@ class AthleteWithRecords
   end
 
   def update_records_for(movement, performance)
-    performance_max = performance.results
-      .select{ |r| r.success? }
-      .map { |r| r.weight }
-      .max
+    performance_max = performance.best_weight
 
     current_max = @records[movement]
     if current_max.blank? || current_max < performance_max

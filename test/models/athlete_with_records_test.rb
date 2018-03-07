@@ -57,4 +57,20 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
 
     assert_equal 100, athlete.opening_weight(nil, movement)
   end
+
+  test "skips update when all attempts are failures" do
+    movement = "snatch"
+    previous = { movement => 110 }
+    athlete = AthleteWithRecords.new(nil, previous)
+    attempts = [
+      LiftAttempt.new(attempt: 0, weight: 100, result: LiftResult.new(attempt: 0, result: 3)),
+      LiftAttempt.new(attempt: 1, weight: 100, result: LiftResult.new(attempt: 1, result: 3)),
+      LiftAttempt.new(attempt: 2, weight: 100, result: LiftResult.new(attempt: 2, result: 3)),
+    ]
+    performance = LiftPerformance.new(starting_weight: nil, attempts: attempts)
+
+    athlete.update_records_for(movement, performance)
+
+    assert_equal 100, athlete.opening_weight(nil, movement)
+  end
 end

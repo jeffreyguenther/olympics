@@ -19,6 +19,8 @@ class WeightLiftingMeet
         movement_results = {}
         movements.each do |movement|
           result = LiftPerformance.new(starting_weight: athlete.opening_weight(@type, movement))
+          athlete.update_records_for(movement, result) # TODO: Consider doing this elsewhere
+
           movement_results[movement] = result
         end
 
