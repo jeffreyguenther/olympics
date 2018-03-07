@@ -18,5 +18,5 @@ benchmarks = [
 benchmarks.each do |benchmark|
   benchmark.import
   puts benchmark.benchmark
-  puts rule
+  puts rule if benchmark != benchmarks.last
 end
