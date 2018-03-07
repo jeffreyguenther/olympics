@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305222138) do
+ActiveRecord::Schema.define(version: 20180307183144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180305222138) do
     t.datetime "updated_at", null: false
     t.integer "weighted_max_effort_id"
     t.boolean "success", default: false
+    t.integer "attempt"
   end
 
   create_table "movements", force: :cascade do |t|

@@ -10,6 +10,7 @@
 #  updated_at             :datetime         not null
 #  weighted_max_effort_id :integer
 #  success                :boolean          default(FALSE)
+#  attempt                :integer
 #
 
 FactoryBot.define do
