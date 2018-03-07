@@ -11,8 +11,9 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
   test "returns previous record for movement" do
     previous = { "jump" => 100 }
     athlete = AthleteWithRecords.new(nil, previous)
+    expected_opening_weight = previous["jump"] - 10
 
-    assert_equal previous["jump"], athlete.opening_weight(nil, "jump")
+    assert_equal expected_opening_weight, athlete.opening_weight(nil, "jump")
   end
 
   test "generates random opening weight for movement" do
@@ -38,7 +39,7 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
 
     athlete.update_records_for(movement, performance)
 
-    assert_equal 105, athlete.opening_weight(nil, movement)
+    assert_equal 95, athlete.opening_weight(nil, movement)
   end
 
   test "skips update given a worse performance" do
@@ -54,6 +55,6 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
 
     athlete.update_records_for(movement, performance)
 
-    assert_equal 110, athlete.opening_weight(nil, movement)
+    assert_equal 100, athlete.opening_weight(nil, movement)
   end
 end

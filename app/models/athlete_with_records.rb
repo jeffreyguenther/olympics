@@ -8,7 +8,12 @@ class AthleteWithRecords
   delegate :id, to: :@athlete
 
   def opening_weight(meet_type, movement)
-    @records[movement] || meet_type.opening_weight_for(movement)
+    current_max = @records[movement]
+    if current_max.blank?
+      meet_type.opening_weight_for(movement)
+    else
+       current_max - 10
+    end
   end
 
   def update_records_for(movement, performance)
