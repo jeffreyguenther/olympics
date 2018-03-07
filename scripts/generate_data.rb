@@ -12,6 +12,11 @@ benchmarks = [
     events: number_of_events,
     athletes: athletes,
     movements: movements
+  ),
+  ImportStrategy::CopyFromInMemory.new(
+    events: number_of_events,
+    athletes: athletes,
+    movements: movements
   )
 ]
 
