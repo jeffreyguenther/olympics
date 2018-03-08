@@ -13,4 +13,13 @@ class WeightedMaxEffort < ApplicationRecord
   enum lifts: { olympic: 0, power: 1}
 
   has_many :attempts
+
+  def winners
+    Athlete.joins(:attempts).where(
+      attempts: {
+        weight: attempts.succeeded.maximum(:weight),
+        weighted_max_effort: self
+      }
+    )
+  end
 end

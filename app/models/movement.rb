@@ -10,4 +10,12 @@
 
 class Movement < ApplicationRecord
   has_many :attempts
+
+  def self.champion(movement)
+    Athlete.joins(:attempts).where(
+      attempts: {
+        weight: attempts.succeeded.where(movement: movement).maximum(:weight)
+      }
+    )
+  end
 end
