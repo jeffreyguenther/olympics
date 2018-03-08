@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307183144) do
+ActiveRecord::Schema.define(version: 20180308010653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 20180307183144) do
     t.integer "weighted_max_effort_id"
     t.boolean "success", default: false
     t.integer "attempt"
+    t.index ["athlete_id"], name: "index_attempts_on_athlete_id"
+    t.index ["movement_id"], name: "index_attempts_on_movement_id"
+    t.index ["weight"], name: "index_attempts_on_weight"
+    t.index ["weighted_max_effort_id"], name: "index_attempts_on_weighted_max_effort_id"
   end
 
   create_table "movements", force: :cascade do |t|
