@@ -1,21 +1,28 @@
-<h1>Dashboard</h1>
+<nav class="bg-black py-2">
+  <h1 class="text-white text-center">Performances</h1>
+</nav>
 
-<h2>Movement Records</h2>
+<main class="container mx-auto pt-8">
+  <div class="flex flex-row flex-wrap justify-center">
+    <% @athletes.each do |athlete| %>
+      <div class="bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+        <h3 class="mb-2"><%= athlete.name %></h3>
 
-<h2>Athlete PRs</h2>
-<% @athletes.each do |athlete| %>
-<h3><%= athlete.name %></h3>
-<table>
-  <thead>
-    <th>Movement</th>
-    <th>Weight (lbs)</th>
-  </thead>
+        <table>
+          <thead class="text-sm font-light text-left pt-3 text-grey-dark">
+            <th>Movement</th>
+            <th>Weight (lbs)</th>
+          </thead>
 
-  <% athlete.personal_records.each_pair do |movement, weight| %>
-    <tr>
-      <td><%= movement %></tr>
-      <td><%= weight %></li></td>
-    </tr>
-  <% end %>
-</table>
-<% end %>
+          <% athlete.personal_records.each_pair do |movement, weight| %>
+            <tr>
+              <td><%= movement %></td>
+              <td class="text-center"><%= weight %></li></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  </div>
+
+</main>
