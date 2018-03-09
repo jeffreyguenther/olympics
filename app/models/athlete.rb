@@ -14,9 +14,9 @@ class Athlete < ApplicationRecord
   def personal_records
     records = attempts.includes(:movement)
       .succeeded
-      .select("MAX(weight) as weight, movement_id")
+      .select("MAX(result) as result, movement_id")
       .group(:movement_id)
-      
-    Hash[records.map { |r| [r.movement.name, r.weight] }]
+
+    Hash[records.map { |r| [r.movement.name, r.result] }]
   end
 end
