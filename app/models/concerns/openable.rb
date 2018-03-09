@@ -4,7 +4,7 @@ module Openable
   class_methods do
     def generate_weight_between(range)
       @@prng ||= Random.new
-      weight = @@prng.rand(range)
+      @@prng.rand(range)
     end
 
     def generate_rounded_weight_between(range)
