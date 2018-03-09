@@ -26,7 +26,7 @@ benchmarks = [
 ]
 
 def clear_db
-  Meet.delete_all
+  Event.delete_all
   Attempt.delete_all
 end
 

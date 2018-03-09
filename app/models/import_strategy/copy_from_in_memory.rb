@@ -25,7 +25,7 @@ class ImportStrategy::CopyFromInMemory
     <<~BENCHMARK
       COPY FROM (in memory)
       Generating #{@events} took #{@duration}ms
-      Meets: #{Meet.count}
+      Events: #{Event.count}
       Attempts: #{Attempt.count}
       Speed: #{@duration / @events}ms per event
     BENCHMARK
@@ -33,7 +33,7 @@ class ImportStrategy::CopyFromInMemory
 
   private
     def build_meet(type)
-      Meet.create(lifts: type)
+      Event.create(lifts: type)
     end
 
     def stream_athletes(meet)

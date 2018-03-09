@@ -1,16 +1,15 @@
 # == Schema Information
 #
-# Table name: weighted_max_efforts
+# Table name: events
 #
 #  id         :integer          not null, primary key
-#  lifts      :integer
-#  match_id   :integer
+#  kinds      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Meet < ApplicationRecord
-  enum lifts: { olympic: 0, power: 1}
+class Event < ApplicationRecord
+  enum kinds: { olympic: 0, power: 1}
 
   has_many :attempts
 
