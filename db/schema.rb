@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308010653) do
+ActiveRecord::Schema.define(version: 20180309001655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,31 +22,31 @@ ActiveRecord::Schema.define(version: 20180308010653) do
   end
 
   create_table "attempts", force: :cascade do |t|
-    t.integer "weight"
+    t.integer "result"
     t.integer "athlete_id"
     t.integer "movement_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "weighted_max_effort_id"
-    t.boolean "success", default: false
+    t.integer "event_id"
+    t.boolean "success", default: true
     t.integer "attempt"
     t.index ["athlete_id"], name: "index_attempts_on_athlete_id"
+    t.index ["event_id"], name: "index_attempts_on_event_id"
     t.index ["movement_id"], name: "index_attempts_on_movement_id"
-    t.index ["weight"], name: "index_attempts_on_weight"
-    t.index ["weighted_max_effort_id"], name: "index_attempts_on_weighted_max_effort_id"
+    t.index ["result"], name: "index_attempts_on_result"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer "kinds"
+    t.integer "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movements", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-  end
-
-  create_table "weighted_max_efforts", force: :cascade do |t|
-    t.integer "lifts"
-    t.integer "match_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

@@ -22,7 +22,7 @@ class ImportStrategy::CopyFromCsv < ImportStrategy::CopyFromInMemory
     <<~BENCHMARK
       COPY FROM (csv)
       Generating #{@events} took #{@duration}ms
-      Meets: #{WeightedMaxEffort.count}
+      Meets: #{Meet.count}
       Attempts: #{Attempt.count}
       Speed: #{@duration / @events}ms per event
     BENCHMARK

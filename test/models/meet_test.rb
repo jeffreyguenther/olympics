@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class WeightedMaxEffortTest < ActiveSupport::TestCase
+class MeetTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -10,7 +10,7 @@ class ImportStrategy::InsertInto < ImportStrategy::Naive
         meet
       end
 
-      WeightedMaxEffort.import(meets, recursive: true)
+      Meet.import(meets, recursive: true)
     end
   end
 
@@ -18,7 +18,7 @@ class ImportStrategy::InsertInto < ImportStrategy::Naive
     <<~BENCHMARK
       INSERT INTO
       Generating #{@events} took #{@duration}ms
-      Meets: #{WeightedMaxEffort.count}
+      Meets: #{Meet.count}
       Attempts: #{Attempt.count}
       Speed: #{@duration / @events}ms per event
     BENCHMARK

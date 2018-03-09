@@ -22,7 +22,7 @@ class ImportStrategy::Naive
     <<~BENCHMARK
       Naive Import
       Generating #{@events} took #{@duration}ms
-      Meets: #{WeightedMaxEffort.count}
+      Meets: #{Meet.count}
       Attempts: #{Attempt.count}
       Speed: #{@duration / @events}ms per event
     BENCHMARK
@@ -30,7 +30,7 @@ class ImportStrategy::Naive
 
   private
     def build_meet(type)
-      WeightedMaxEffort.new(lifts: type)
+      Meet.new(lifts: type)
     end
 
     def build_records_for_athletes

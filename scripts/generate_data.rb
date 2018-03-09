@@ -26,7 +26,7 @@ benchmarks = [
 ]
 
 def clear_db
-  WeightedMaxEffort.delete_all
+  Meet.delete_all
   Attempt.delete_all
 end
 

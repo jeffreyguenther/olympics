@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class WeightedMaxEffort < ApplicationRecord
+class Meet < ApplicationRecord
   enum lifts: { olympic: 0, power: 1}
 
   has_many :attempts
