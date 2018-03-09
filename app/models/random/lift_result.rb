@@ -1,4 +1,4 @@
-class LiftResult
+class Random::LiftResult
   attr_reader :attempt, :result
 
   def initialize(attempt:, result: nil)

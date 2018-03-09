@@ -1,4 +1,4 @@
-class ImportStrategy::CopyFromInMemory
+class Import::CopyFromInMemory
 
   def initialize(events: 1, athletes:, movements:)
     @events = events
@@ -13,7 +13,7 @@ class ImportStrategy::CopyFromInMemory
     # generate meet type
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = WeightLiftingMeet.new(type: OlympicMeet, athletes: @athletes).results
+        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
 
         stream_athletes(meet)

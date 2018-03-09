@@ -1,24 +1,24 @@
-athletes = Athlete.all.map{ |a| AthleteWithRecords.new(a)}
+athletes = Athlete.all.map{ |a| Import::AthleteWithRecords.new(a)}
 movements = Hash[Movement.all.map { |m| [m.name, m.id] }]
 number_of_events = 10
 rule = "-" * 50
 benchmarks = [
-  ImportStrategy::Naive.new(
+  Import::Naive.new(
     events: number_of_events,
     athletes: athletes,
     movements: movements
   ),
-  ImportStrategy::InsertInto.new(
+  Import::InsertInto.new(
     events: number_of_events,
     athletes: athletes,
     movements: movements
   ),
-  ImportStrategy::CopyFromInMemory.new(
+  Import::CopyFromInMemory.new(
     events: number_of_events,
     athletes: athletes,
     movements: movements
   ),
-  ImportStrategy::CopyFromCsv.new(
+  Import::CopyFromCsv.new(
     events: number_of_events,
     athletes: athletes,
     movements: movements

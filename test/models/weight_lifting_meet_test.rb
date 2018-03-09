@@ -2,11 +2,11 @@ require 'test_helper'
 
 class WeightLiftingMeetTest < ActiveSupport::TestCase
   test "generates performances olympic meet" do
-    jim = AthleteWithRecords.new(Athlete.create(name: "Jim"))
-    bob = AthleteWithRecords.new(Athlete.create(name: "Bob"))
+    jim = Import::AthleteWithRecords.new(Athlete.create(name: "Jim"))
+    bob = Import::AthleteWithRecords.new(Athlete.create(name: "Bob"))
     athletes = [jim, bob]
 
-    meet = WeightLiftingMeet.new(type: OlympicMeet, athletes: athletes)
+    meet = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: athletes)
     results = meet.results
 
     assert_equal 2, results[jim].count
@@ -14,11 +14,11 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
   end
 
   test "generates performances powerlifting meet" do
-    jim = AthleteWithRecords.new(Athlete.create(name: "Jim"))
-    bob = AthleteWithRecords.new(Athlete.create(name: "Bob"))
+    jim = Import::AthleteWithRecords.new(Athlete.create(name: "Jim"))
+    bob = Import::AthleteWithRecords.new(Athlete.create(name: "Bob"))
     athletes = [jim, bob]
 
-    meet = WeightLiftingMeet.new(type: PowerliftingMeet, athletes: athletes)
+    meet = Random::WeightLiftingMeet.new(type: Random::PowerliftingMeet, athletes: athletes)
     results = meet.results
 
     assert_equal 3, results[jim].count

@@ -1,4 +1,4 @@
-class LiftPerformance
+class Random::LiftPerformance
   attr_reader :results
 
   def initialize(starting_weight:, attempts: nil)
@@ -15,7 +15,7 @@ class LiftPerformance
       current_weight = @starting_weight
 
       3.times.map do |attempt|
-        attempt = LiftAttempt.new(attempt: attempt, weight: current_weight)
+        attempt = Random::LiftAttempt.new(attempt: attempt, weight: current_weight)
         current_weight = attempt.next_weight
         attempt
       end

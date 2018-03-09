@@ -1,4 +1,4 @@
-class ImportStrategy::Naive
+class Import::Naive
   def initialize(events: 1, athletes:, movements:)
     @events = events
     @duration  = 0
@@ -10,7 +10,7 @@ class ImportStrategy::Naive
     # generate meet type
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = WeightLiftingMeet.new(type: OlympicMeet, athletes: @athletes).results
+        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
         meet.attempts << build_records_for_athletes
         meet.save

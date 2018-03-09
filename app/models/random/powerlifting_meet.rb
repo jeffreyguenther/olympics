@@ -1,4 +1,4 @@
-class PowerliftingMeet
+class Random::PowerliftingMeet
   include Openable
 
   def self.movements

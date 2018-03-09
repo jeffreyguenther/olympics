@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   def winners
     Athlete.joins(:attempts).where(
       attempts: {
-        weight: attempts.succeeded.maximum(:weight),
+        result: attempts.succeeded.maximum(:result),
         event: self
       }
     )

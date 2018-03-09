@@ -1,6 +1,6 @@
 require "csv"
 
-class ImportStrategy::CopyFromCsv < ImportStrategy::CopyFromInMemory
+class Import::CopyFromCsv < Import::CopyFromInMemory
   ATTEMPTS_FILE = "attempts.csv"
 
   def import
@@ -8,7 +8,7 @@ class ImportStrategy::CopyFromCsv < ImportStrategy::CopyFromInMemory
 
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = WeightLiftingMeet.new(type: OlympicMeet, athletes: @athletes).results
+        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
 
         stream_data_to_csv(meet)

@@ -1,4 +1,4 @@
-class AthleteWithRecords
+class Import::AthleteWithRecords
 
   def initialize(athlete, records = {})
     @athlete = athlete

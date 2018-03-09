@@ -1,10 +1,10 @@
-class ImportStrategy::InsertInto < ImportStrategy::Naive
+class Import::InsertInto < Import::Naive
 
   def import
     # generate meet type
     @duration = Benchmark.ms do
       meets = @events.times.map do
-        @meet_results = WeightLiftingMeet.new(type: OlympicMeet, athletes: @athletes).results
+        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
         meet.attempts << build_records_for_athletes
         meet

@@ -1,4 +1,4 @@
-class LiftAttempt
+class Random::LiftAttempt
   WEIGHT_JUMP = 5
   attr_reader :attempt, :weight, :result
 
@@ -20,6 +20,6 @@ class LiftAttempt
 
   private
     def generate_random_result
-      LiftResult.new(attempt: attempt)
+      Random::LiftResult.new(attempt: attempt)
     end
 end
