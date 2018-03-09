@@ -52,7 +52,7 @@ class ImportStrategy::CopyFromCsv < ImportStrategy::CopyFromInMemory
     end
 
     def stream_data_via_copy
-      @pg_connection.copy_data("COPY attempts (weight,  attempt, athlete_id, movement_id, created_at, updated_at, weighted_max_effort_id, success) FROM STDIN CSV") do
+      @pg_connection.copy_data("COPY attempts (result,  attempt, athlete_id, movement_id, created_at, updated_at, event_id, success) FROM STDIN CSV") do
         File.open("#{Rails.root}/#{ATTEMPTS_FILE}") do |fd|
           while data = fd.read(100000)
             @pg_connection.put_copy_data(data)

@@ -33,7 +33,7 @@ class ImportStrategy::CopyFromInMemory
 
   private
     def build_meet(type)
-      Event.create(lifts: type)
+      Event.create(kinds: type)
     end
 
     def stream_athletes(meet)
@@ -49,7 +49,7 @@ class ImportStrategy::CopyFromInMemory
     end
 
     def stream_data_via_copy(meet, athlete, movement, attempt)
-      @pg_connection.copy_data("COPY attempts (weight, attempt, athlete_id, movement_id, created_at, updated_at, weighted_max_effort_id, success) FROM STDIN", @pg_encoding) do
+      @pg_connection.copy_data("COPY attempts (result, attempt, athlete_id, movement_id, created_at, updated_at, event_id, success) FROM STDIN", @pg_encoding) do
         @pg_connection.put_copy_data([
           attempt.weight, attempt.attempt, athlete.id, @movement_ids[movement],
           Time.now.to_s, Time.now.to_s, meet.id, attempt.success?

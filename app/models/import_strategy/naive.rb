@@ -30,7 +30,7 @@ class ImportStrategy::Naive
 
   private
     def build_meet(type)
-      Event.new(lifts: type)
+      Event.new(kinds: type)
     end
 
     def build_records_for_athletes
@@ -50,7 +50,7 @@ class ImportStrategy::Naive
     def build_record_for_attempt(athlete, movement, attempt)
       Attempt.new(
         attempt: attempt.attempt,
-        weight: attempt.weight,
+        result: attempt.weight,
         success: attempt.success?,
         athlete_id: athlete.id,
         movement_id: @movement_ids[movement]
