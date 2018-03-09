@@ -21,7 +21,7 @@
 #
 
 class Attempt < ApplicationRecord
-  belongs_to :weighted_max_effort
+  belongs_to :event
   belongs_to :athlete
   belongs_to :movement
 
