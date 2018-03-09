@@ -56,12 +56,24 @@ class Random::RunResult
       end
     end
 
+  private
+    def generate_time
+      case distance
+      when 500
+        generate_500m_time(speed)
+      when 1000
+        generate_1000m_time(speed)
+      when 5000
+        generate_5000m_time(speed)
+      end
+    end
+
     def generate_run_time_between(range)
       random_between(range)
     end
 
     def generate_speed
-      convert_speed_to_symbol(random_between(0..3))
+      convert_speed_to_symbol(random_between(0..2))
     end
 
     def convert_speed_to_symbol(speed)
