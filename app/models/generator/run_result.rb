@@ -1,4 +1,5 @@
 class Generator::RunResult < Generator::DistanceResult
+
   protected
     def generate_500m_time(speed)
       case speed
