@@ -7,7 +7,7 @@ class Random::RowResult < Random::DistanceResult
       when :medium
         generate_run_time_between(1.minute + 35.seconds..1.minute + 49.seconds)
       when :fast
-        generate_run_time_between(1.minute + 34.seconds..1.minute + 15.seconds)
+        generate_run_time_between(1.minute + 15.seconds..1.minute + 34.seconds)
       end
     end
 
