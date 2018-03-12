@@ -1,4 +1,5 @@
-class Random::RunResult < Random::DistanceResult
+class Generator::RunningMeet
+
   protected
     def generate_500m_time(speed)
       case speed

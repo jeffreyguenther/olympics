@@ -8,7 +8,7 @@ class Import::CopyFromCsv < Import::CopyFromInMemory
 
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
+        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
 
         stream_data_to_csv(meet)

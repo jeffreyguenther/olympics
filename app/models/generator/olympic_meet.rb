@@ -1,4 +1,4 @@
-class Random::OlympicMeet
+class Generator::OlympicMeet
   include Openable
 
   def self.movements

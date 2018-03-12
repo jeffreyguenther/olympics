@@ -1,4 +1,4 @@
-class Random::PowerliftingMeet
+class Generator::PowerliftingMeet
   include Openable
 
   def self.movements

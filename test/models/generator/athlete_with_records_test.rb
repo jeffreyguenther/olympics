@@ -21,7 +21,7 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     expected_range = (100..185)
     athlete = Import::AthleteWithRecords.new(nil, previous)
 
-    opening = athlete.opening_weight(Random::OlympicMeet, "snatch")
+    opening = athlete.opening_weight(Generator::OlympicMeet, "snatch")
 
     assert_not_equal 0, opening
     assert_equal 0, opening % 5
@@ -31,7 +31,7 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     expected_range = (100..185)
     with_records = Import::AthleteWithRecords.new(nil)
 
-    weight = with_records.opening_weight(Random::OlympicMeet, "snatch")
+    weight = with_records.opening_weight(Generator::OlympicMeet, "snatch")
 
     assert_includes expected_range, weight
     assert_equal 0, weight % 5
@@ -42,11 +42,11 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     previous = { movement => 5 }
     athlete = Import::AthleteWithRecords.new(nil, previous)
     attempts = [
-      Random::LiftAttempt.new(attempt: 0, weight: 100, result: Random::LiftResult.new(attempt: 0, result: 0)),
-      Random::LiftAttempt.new(attempt: 1, weight: 105, result: Random::LiftResult.new(attempt: 1, result: 0)),
-      Random::LiftAttempt.new(attempt: 2, weight: 110, result: Random::LiftResult.new(attempt: 2, result: 1)),
+      Generator::LiftAttempt.new(attempt: 0, weight: 100, result: Generator::LiftResult.new(attempt: 0, result: 0)),
+      Generator::LiftAttempt.new(attempt: 1, weight: 105, result: Generator::LiftResult.new(attempt: 1, result: 0)),
+      Generator::LiftAttempt.new(attempt: 2, weight: 110, result: Generator::LiftResult.new(attempt: 2, result: 1)),
     ]
-    performance = Random::LiftPerformance.new(starting_weight: 100, attempts: attempts)
+    performance = Generator::LiftPerformance.new(starting_weight: 100, attempts: attempts)
 
     athlete.update_records_for(movement, performance)
 
@@ -58,11 +58,11 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     previous = { movement => 110 }
     athlete = Import::AthleteWithRecords.new(nil, previous)
     attempts = [
-      Random::LiftAttempt.new(attempt: 0, weight: 100, result: Random::LiftResult.new(attempt: 0, result: 0)),
-      Random::LiftAttempt.new(attempt: 1, weight: 105, result: Random::LiftResult.new(attempt: 1, result: 0)),
-      Random::LiftAttempt.new(attempt: 2, weight: 110, result: Random::LiftResult.new(attempt: 2, result: 1)),
+      Generator::LiftAttempt.new(attempt: 0, weight: 100, result: Generator::LiftResult.new(attempt: 0, result: 0)),
+      Generator::LiftAttempt.new(attempt: 1, weight: 105, result: Generator::LiftResult.new(attempt: 1, result: 0)),
+      Generator::LiftAttempt.new(attempt: 2, weight: 110, result: Generator::LiftResult.new(attempt: 2, result: 1)),
     ]
-    performance = Random::LiftPerformance.new(starting_weight: nil, attempts: attempts)
+    performance = Generator::LiftPerformance.new(starting_weight: nil, attempts: attempts)
 
     athlete.update_records_for(movement, performance)
 
@@ -74,11 +74,11 @@ class AthleteWithRecordsTest < ActiveSupport::TestCase
     previous = { movement => 110 }
     athlete = Import::AthleteWithRecords.new(nil, previous)
     attempts = [
-      Random::LiftAttempt.new(attempt: 0, weight: 100, result: Random::LiftResult.new(attempt: 0, result: 3)),
-      Random::LiftAttempt.new(attempt: 1, weight: 100, result: Random::LiftResult.new(attempt: 1, result: 3)),
-      Random::LiftAttempt.new(attempt: 2, weight: 100, result: Random::LiftResult.new(attempt: 2, result: 3)),
+      Generator::LiftAttempt.new(attempt: 0, weight: 100, result: Generator::LiftResult.new(attempt: 0, result: 3)),
+      Generator::LiftAttempt.new(attempt: 1, weight: 100, result: Generator::LiftResult.new(attempt: 1, result: 3)),
+      Generator::LiftAttempt.new(attempt: 2, weight: 100, result: Generator::LiftResult.new(attempt: 2, result: 3)),
     ]
-    performance = Random::LiftPerformance.new(starting_weight: nil, attempts: attempts)
+    performance = Generator::LiftPerformance.new(starting_weight: nil, attempts: attempts)
 
     athlete.update_records_for(movement, performance)
 

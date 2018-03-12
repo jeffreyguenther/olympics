@@ -4,7 +4,7 @@ class Import::InsertInto < Import::Naive
     # generate meet type
     @duration = Benchmark.ms do
       meets = @events.times.map do
-        @meet_results = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: @athletes).results
+        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
         meet = build_meet("olympic")
         meet.attempts << build_records_for_athletes
         meet

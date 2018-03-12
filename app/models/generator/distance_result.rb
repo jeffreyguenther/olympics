@@ -1,4 +1,4 @@
-class Random::DistanceResult
+class Generator::DistanceResult
   attr_reader :speed, :distance
 
   def initialize(distance:, speed: nil, result: nil)

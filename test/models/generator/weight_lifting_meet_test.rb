@@ -6,7 +6,7 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
     bob = Import::AthleteWithRecords.new(Athlete.create(name: "Bob"))
     athletes = [jim, bob]
 
-    meet = Random::WeightLiftingMeet.new(type: Random::OlympicMeet, athletes: athletes)
+    meet = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: athletes)
     results = meet.results
 
     assert_equal 2, results[jim].count
@@ -18,7 +18,7 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
     bob = Import::AthleteWithRecords.new(Athlete.create(name: "Bob"))
     athletes = [jim, bob]
 
-    meet = Random::WeightLiftingMeet.new(type: Random::PowerliftingMeet, athletes: athletes)
+    meet = Generator::WeightLiftingMeet.new(type: Generator::PowerliftingMeet, athletes: athletes)
     results = meet.results
 
     assert_equal 3, results[jim].count

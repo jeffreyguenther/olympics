@@ -1,4 +1,4 @@
-class Random::RowResult < Random::DistanceResult
+class Generator::RowResult < Generator::DistanceResult
   protected
     def generate_500m_time(speed)
       case speed
