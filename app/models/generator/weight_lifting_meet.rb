@@ -19,7 +19,7 @@ class Generator::WeightLiftingMeet
         movement_results = {}
         movements.each do |movement|
           result = Generator::LiftPerformance.new(starting_weight: athlete.opening_weight(@type, movement))
-          athlete.update_records_for(movement, result) # TODO: Consider doing this elsewhere
+          athlete.update_records_for(movement, result)
 
           movement_results[movement] = result
         end
