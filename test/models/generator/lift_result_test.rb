@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class LiftResultTest < ActiveSupport::TestCase
+  test "fail when attempt is not between 0 and 2" do
+    result = Generator::LiftResult.new(attempt: 10, result: 0)
+
+    assert_not result.success?
+  end
+
   test "succeed when attempt is 0 and result is 0" do
     result = Generator::LiftResult.new(attempt: 0, result: 0)
 
