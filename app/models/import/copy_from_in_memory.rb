@@ -1,4 +1,5 @@
 class Import::CopyFromInMemory
+  include Benchmarkable
 
   def initialize(events: 1, athletes:, movements:)
     @events = events
@@ -10,49 +11,35 @@ class Import::CopyFromInMemory
   end
 
   def import
-    # generate meet type
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
-        meet = build_meet("olympic")
+        event_data = Generator::Event.new(athletes: @athletes)
 
-        stream_athletes(meet)
+        event = build_event(event_data.type)
+
+        stream_athletes(event, event_data.performances)
       end
     end
-  end
-
-  def benchmark
-    <<~BENCHMARK
-      COPY FROM (in memory)
-      Generating #{@events} took #{@duration}ms
-      Events: #{Event.count}
-      Attempts: #{Attempt.count}
-      Speed: #{@duration / @events}ms per event
-    BENCHMARK
   end
 
   private
-    def build_meet(type)
+    def header
+      "COPY FROM (in memory)"
+    end
+
+    def build_event(type)
       Event.create(kinds: type)
     end
 
-    def stream_athletes(meet)
-      @athletes.each { |athlete| stream_athlete_results(meet, athlete)}
+    def stream_athletes(event, performances)
+      performances.each { |p| p.results.each { |r| stream_data_via_copy(event, p.athlete, p.movement, r)}}
     end
 
-    def stream_athlete_results(meet, athlete)
-      @meet_results[athlete].map do |movement, performance|
-        performance.results.each do |attempt|
-          stream_data_via_copy(meet, athlete, movement, attempt)
-        end
-      end
-    end
-
-    def stream_data_via_copy(meet, athlete, movement, attempt)
+    def stream_data_via_copy(event, athlete, movement, attempt)
       @pg_connection.copy_data("COPY attempts (result, attempt, athlete_id, movement_id, created_at, updated_at, event_id, success) FROM STDIN", @pg_encoding) do
         @pg_connection.put_copy_data([
-          attempt.weight, attempt.attempt, athlete.id, @movement_ids[movement],
-          Time.now.to_s, Time.now.to_s, meet.id, attempt.success?
+          attempt.score, attempt.attempt, athlete.id, @movement_ids[movement],
+          Time.now.to_s, Time.now.to_s, event.id, attempt.success?
         ])
       end
     end

@@ -1,4 +1,6 @@
 class Import::Naive
+  include Benchmarkable
+  
   def initialize(events: 1, athletes:, movements:)
     @events = events
     @duration  = 0
@@ -7,51 +9,36 @@ class Import::Naive
   end
 
   def import
-    # generate meet type
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
-        meet = build_meet("olympic")
-        meet.attempts << build_records_for_athletes
-        meet.save
+        event_data = Generator::Event.new(athletes: @athletes)
+
+        event = build_event(event_data.type)
+        event.attempts << build_records_for_performances(event_data.performances)
+        event.save
       end
     end
-  end
-
-  def benchmark
-    <<~BENCHMARK
-      Naive Import
-      Generating #{@events} took #{@duration}ms
-      Events: #{Event.count}
-      Attempts: #{Attempt.count}
-      Speed: #{@duration / @events}ms per event
-    BENCHMARK
   end
 
   private
-    def build_meet(type)
+    def header
+      "Naive Import"
+    end
+
+    def build_event(type)
       Event.new(kinds: type)
     end
 
-    def build_records_for_athletes
-      @athletes.map { |athlete| build_records_for_athlete(athlete)}.flatten
+    def build_records_for_performances(performances)
+      performances.map { |p| p.results.map { |r| build_record_for_result(p.athlete, p.movement, r)}}
+        .flatten
     end
 
-    def build_records_for_athlete(athlete)
-      @meet_results[athlete].map do |movement, performance|
-        build_records_for_performance(athlete, movement, performance)
-      end
-    end
-
-    def build_records_for_performance(athlete, movement, performance)
-      performance.results.map { |attempt| build_record_for_attempt(athlete, movement, attempt)  }
-    end
-
-    def build_record_for_attempt(athlete, movement, attempt)
+    def build_record_for_result(athlete, movement, result)
       Attempt.new(
-        attempt: attempt.attempt,
-        result: attempt.weight,
-        success: attempt.success?,
+        attempt: result.attempt,
+        result: result.score,
+        success: result.success?,
         athlete_id: athlete.id,
         movement_id: @movement_ids[movement]
       )

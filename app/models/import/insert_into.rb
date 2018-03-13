@@ -1,26 +1,23 @@
 class Import::InsertInto < Import::Naive
+  include Benchmarkable
 
   def import
-    # generate meet type
     @duration = Benchmark.ms do
-      meets = @events.times.map do
-        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
-        meet = build_meet("olympic")
-        meet.attempts << build_records_for_athletes
-        meet
+      events = @events.times.map do
+        event_data = Generator::Event.new(athletes: @athletes)
+
+        event = build_event(event_data.type)
+        event.attempts << build_records_for_performances(event_data.performances)
+
+        event
       end
 
-      Event.import(meets, recursive: true)
+      Event.import(events, recursive: true)
     end
   end
 
-  def benchmark
-    <<~BENCHMARK
-      INSERT INTO
-      Generating #{@events} took #{@duration}ms
-      Events: #{Event.count}
-      Attempts: #{Attempt.count}
-      Speed: #{@duration / @events}ms per event
-    BENCHMARK
-  end
+  private
+    def header
+      "INSERT INTO"
+    end
 end

@@ -1,6 +1,8 @@
 require "csv"
 
 class Import::CopyFromCsv < Import::CopyFromInMemory
+  include Benchmarkable
+
   ATTEMPTS_FILE = "attempts.csv"
 
   def import
@@ -8,46 +10,33 @@ class Import::CopyFromCsv < Import::CopyFromInMemory
 
     @duration = Benchmark.ms do
       @events.times do
-        @meet_results = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: @athletes).results
-        meet = build_meet("olympic")
+        event_data = Generator::Event.new(athletes: @athletes)
 
-        stream_data_to_csv(meet)
+        event = build_event(event_data.type)
+
+        stream_data_to_csv(event, event_data.performances)
       end
     end
 
     stream_data_via_copy
   end
 
-  def benchmark
-    <<~BENCHMARK
-      COPY FROM (csv)
-      Generating #{@events} took #{@duration}ms
-      Events: #{Event.count}
-      Attempts: #{Attempt.count}
-      Speed: #{@duration / @events}ms per event
-    BENCHMARK
-  end
-
   private
+    def header
+      "COPY FROM (csv)"
+    end
+  
     def remove_csv
       FileUtils.rm("#{Rails.root}/#{ATTEMPTS_FILE}", force: true)
     end
 
-    def stream_athletes(meet, csv)
-      @athletes.each { |athlete| stream_athlete_results(meet, athlete, csv)}
-    end
-
-    def stream_athlete_results(meet, athlete,  csv)
-      @meet_results[athlete].each_pair do |movement, performance|
-        performance.results.each do |attempt|
-          csv << [attempt.weight, attempt.attempt, athlete.id, @movement_ids[movement], "now()", "now()", meet.id, attempt.success?]
-        end
-      end
-    end
-
-    def stream_data_to_csv(meet)
+    def stream_data_to_csv(meet, performances)
       CSV.open("#{Rails.root}/#{ATTEMPTS_FILE}", "ab") do |csv|
-        stream_athletes(meet, csv)
+        performances.each do |p|
+          p.results.each do |r|
+            csv << [r.score, r.attempt, p.athlete.id, @movement_ids[p.movement], "now()", "now()", meet.id, r.success?]
+          end
+        end
       end
     end
 
