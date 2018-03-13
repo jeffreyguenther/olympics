@@ -3,9 +3,9 @@
 The project description calls for generating 1 million events. 1 million events
 will result in many more database records.
 
-For example, a lifting event creates NUM_ATHLETES * MOVEMENTS * 3 ATTEMPTS.
-As a concrete example, an olympic meet consists of three events. If the field
-of athlete is 4, per the seed file, there are 4 * 3 * 3 + 1 = 37 records per event.
+For example, a lifting event creates `NUM_ATHLETES * MOVEMENTS * 3 ATTEMPTS`. As
+a concrete example, an olympic meet consists of three events. If the field of
+athlete is 4, per the seed file, there are `4 * 3 * 3 + 1 = 37` records per event.
 Multiply this by the number of events you want to generate, you will end up with
 37 000 000 records. This is a non-trivial amount of data.
 
