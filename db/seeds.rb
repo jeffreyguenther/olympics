@@ -5,11 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Movement.create(name: "run")
-Movement.create(name: "row")
+Movement.create(name: "500m run")
+Movement.create(name: "1000m run")
+Movement.create(name: "5000m run")
+
+Movement.create(name: "500m row")
+Movement.create(name: "1000m row")
+Movement.create(name: "5000m row")
+
 Movement.create(name: "squat")
 Movement.create(name: "bench")
 Movement.create(name: "deadlift")
+
 Movement.create(name: "clean and jerk")
 Movement.create(name: "snatch")
 
