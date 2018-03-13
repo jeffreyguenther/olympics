@@ -15,7 +15,8 @@ There are three ways this data can be imported:
 will generate one SQL statement per record.
 
 2. `INSERT INTO` - you can import the records in one SQL statement. Libraries
-like [`activerecord-import`](https://github.com/zdennis/activerecord-import) and [`bulk_insert`](https://github.com/jamis/bulk_insert) reduce the work record to
+like [`activerecord-import`](https://github.com/zdennis/activerecord-import) and
+[`bulk_insert`](https://github.com/jamis/bulk_insert) reduce the work record to
 generate the statement.
 
 3. `COPY FROM` - While `INSERT INTO` is definitely faster than the naïve
