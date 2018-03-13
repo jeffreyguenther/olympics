@@ -1,4 +1,6 @@
 class Generator::DistanceResult
+  include Randomable
+
   attr_reader :speed, :distance
 
   def initialize(distance:, speed: nil, result: nil)
@@ -7,8 +9,18 @@ class Generator::DistanceResult
     @result = result || generate_time
   end
 
-  def result
+  # These methods allow DistanceResults
+  # to quack like LiftAttempts
+  def score
     @result.to_i
+  end
+
+  def attempt
+    0
+  end
+
+  def success?
+    true
   end
 
   protected
@@ -27,11 +39,11 @@ class Generator::DistanceResult
   private
     def generate_time
       case distance
-      when 500
+      when Generator::DistanceEvent::SHORT
         generate_500m_time(speed)
-      when 1000
+      when Generator::DistanceEvent::MEDIUM
         generate_1000m_time(speed)
-      when 5000
+      when Generator::DistanceEvent::LONG
         generate_5000m_time(speed)
       end
     end
@@ -53,10 +65,5 @@ class Generator::DistanceResult
       when 2
         :fast
       end
-    end
-
-    def random_between(range)
-      @@prng ||= Random.new
-      @@prng.rand(range)
     end
 end

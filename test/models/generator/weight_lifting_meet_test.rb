@@ -9,8 +9,7 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
     meet = Generator::WeightLiftingMeet.new(type: Generator::OlympicMeet, athletes: athletes)
     results = meet.results
 
-    assert_equal 2, results[jim].count
-    assert_equal 2, results[bob].count
+    assert_equal 4, results.count
   end
 
   test "generates performances powerlifting meet" do
@@ -20,8 +19,7 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
 
     meet = Generator::WeightLiftingMeet.new(type: Generator::PowerliftingMeet, athletes: athletes)
     results = meet.results
-
-    assert_equal 3, results[jim].count
-    assert_equal 3, results[bob].count
+    
+    assert_equal 6, results.count
   end
 end

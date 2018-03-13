@@ -13,20 +13,15 @@ class Generator::WeightLiftingMeet
     end
 
     def generate_athlete_performances
-      results = {}
-
-      @athletes.each do |athlete|
-        movement_results = {}
-        movements.each do |movement|
+      athlete_performances = @athletes.map do |athlete|
+        movements.map do |movement|
           result = Generator::LiftPerformance.new(starting_weight: athlete.opening_weight(@type, movement))
           athlete.update_records_for(movement, result)
 
-          movement_results[movement] = result
+          Generator::AthletePerformance.new(athlete: athlete, movement: movement, results: result.results)
         end
-
-        results[athlete] = movement_results
       end
 
-      results
+      athlete_performances.flatten
     end
 end

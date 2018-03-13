@@ -9,6 +9,7 @@ class Generator::LiftAttempt
   end
 
   delegate :success?, to: :result
+  alias_method :score, :weight
 
   def next_weight
     if success?
