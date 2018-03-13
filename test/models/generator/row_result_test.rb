@@ -52,21 +52,21 @@ class RowResultTest < ActiveSupport::TestCase
 
   test "generates slow 5000m row" do
     meet = Generator::RowResult.new(distance: 5000, speed: :slow)
-    expected_range = (20.minutes + 1.second..28.minutes)
+    expected_range = (22.minutes..25.minutes)
 
     assert_includes expected_range, meet.score
   end
 
   test "generates medium 5000m row" do
     meet = Generator::RowResult.new(distance: 5000, speed: :medium)
-    expected_range = (15.minutes + 1.second..20.minutes)
+    expected_range = (18.minutes..21.minutes + 59.seconds)
 
     assert_includes expected_range, meet.score
   end
 
   test "generates fast 5000m row" do
     meet = Generator::RowResult.new(distance: 5000, speed: :fast)
-    expected_range = (13.minute + 30.seconds..15.minutes)
+    expected_range = (15.minutes..17.minutes + 59.seconds)
 
     assert_includes expected_range, meet.score
   end
