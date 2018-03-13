@@ -18,4 +18,12 @@ class Movement < ApplicationRecord
       }
     )
   end
+
+  def top_performance_by_max
+    attempts.succeeded.maximum(:result)
+  end
+
+  def top_performance_by_min
+    attempts.succeeded.minimum(:result)
+  end
 end

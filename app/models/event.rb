@@ -13,6 +13,10 @@ class Event < ApplicationRecord
 
   has_many :attempts
 
+  def self.distribution_of_events
+    Event.group(:kinds).count
+  end
+
   def winners
     Athlete.joins(:attempts).where(
       attempts: {

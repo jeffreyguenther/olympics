@@ -25,4 +25,9 @@
     <% end %>
   </div>
 
+  <div class="">
+    <% @event_distribution.each_pair do |type, count| %>
+      <%= type %>: <%= count %>
+    <% end %>
+  </div>
 </main>
