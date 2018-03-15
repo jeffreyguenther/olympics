@@ -3,31 +3,40 @@
 </nav>
 
 <main class="container mx-auto pt-8">
-  <div class="flex flex-row flex-wrap justify-center">
+  <div class="flex flex-row flex-wrap items-baseline bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+    <span class="hidden lg:inline text-3xl mr-2">🏆</span>
+    <h2 class="text-4xl">Overall Winner:</h2>
+    <span class="text-left text-4xl font-light flex-auto ml-0 md:ml-4">Jimmy Jumps</span>
+    <span class="hidden lg:inline text-3xl ml-2">🏆</span>
+  </div>
+
+  <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Athletes</h2>
+  <div class="flex flex-row flex-wrap">
     <% @athletes.each do |athlete| %>
-      <div class="bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-        <h3 class="mb-2"><%= athlete.name %></h3>
-
-        <table>
-          <thead class="text-sm font-light text-left pt-3 text-grey-dark">
-            <th>Movement</th>
-            <th>Weight (lbs)</th>
-          </thead>
-
-          <% athlete.personal_records.each_pair do |movement, weight| %>
-            <tr>
-              <td><%= movement %></td>
-              <td class="text-center"><%= weight %></li></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+      <%= link_to "#", class: "flex-grow no-underline text-black" do %>
+        <div class="flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+          <%= image_tag "albert-dera-397063-unsplash.jpg", class: "w-8 h-8 rounded-full mr-2" %>
+          <h3 class="font-light"><%= athlete.name %></h3>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
-  <div class="">
-    <% @event_distribution.each_pair do |type, count| %>
-      <%= type %>: <%= count %>
+  <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Competition Overview</h2>
+  <div class="h-16 flex flex-row flex-wrap items-baseline bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+  </div>
+
+  <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Movement Champions</h2>
+  <div class="flex flex-row flex-wrap">
+    <% @movements.each do |movement| %>
+        <div class="flex-grow flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+          <div class="flex w-24 flex-wrap text-center content-center justify-center">
+            <span class="rounded-full bg-grey-light w-16 h-16 flex items-center justify-center text-3xl">🏆</span>
+            <div class="text-sm font-light text-grey-darkest mt-1"><%= movement.name %></div>
+          </div>
+          <h3 class="font-medium">Junior Jumps</h3>
+        </div>
     <% end %>
   </div>
+
 </main>
