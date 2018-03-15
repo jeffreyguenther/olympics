@@ -11,7 +11,7 @@
   </div>
 
   <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Athletes</h2>
-  <div class="flex flex-row flex-wrap">
+  <div class="flex flex-row flex-wrap md:flex-no-wrap">
     <% @athletes.each do |athlete| %>
       <%= link_to "#", class: "flex-grow no-underline text-black" do %>
         <div class="flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
@@ -29,12 +29,12 @@
   <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Movement Champions</h2>
   <div class="flex flex-row flex-wrap">
     <% @movements.each do |movement| %>
-        <div class="flex-grow flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-          <div class="flex w-24 flex-wrap text-center content-center justify-center">
-            <span class="rounded-full bg-grey-light w-16 h-16 flex items-center justify-center text-3xl">🏆</span>
-            <div class="text-sm font-light text-grey-darkest mt-1"><%= movement.name %></div>
+        <div style="min-width:25%;" class="flex-grow flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+          <div class="text-center mr-3">
+            <div class="text-3xl">🏆</div>
+            <div class="text-xs font-light text-grey-darkest"><%= movement.name %></div>
           </div>
-          <h3 class="font-medium">Junior Jumps</h3>
+          <h3 class="block font-medium">Junior Jumps</h3>
         </div>
     <% end %>
   </div>
