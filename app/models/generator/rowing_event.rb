@@ -1,7 +1,7 @@
 class Generator::RowingEvent < Generator::DistanceEvent
 
-  def movement_for_distance(distance)
-    "#{distance}m row"
+  def movement_type
+    "row"
   end
 
   def generate_performance(distance, athlete)

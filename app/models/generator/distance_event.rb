@@ -7,15 +7,19 @@ class Generator::DistanceEvent
 
   attr_reader :results
 
-  def initialize(athletes:)
+  def initialize(athletes:, distance: nil, results: nil)
     @athletes = athletes
-    @distance = generate_distance
-    @results = generate_athlete_performances
+    @distance = distance || generate_distance
+    @results = results || generate_athlete_performances
   end
 
   protected
     def generate_performance(distance, athlete)
       raise NotImplementedError
+    end
+
+    def movement_for_distance(distance)
+      "#{distance}m #{movement_type}"
     end
 
     def movement
