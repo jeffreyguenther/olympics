@@ -7,6 +7,21 @@ class Generator::WeightLiftingMeet
     @results = performances || generate_athlete_performances
   end
 
+  def winners
+    athlete_performances = results.group_by(&:athlete)
+
+    athlete_totals = athlete_performances.map do |athlete, movement|
+      combined_total = movement.map { |m| m.score }.reduce(:+)
+      [athlete, combined_total]
+    end
+
+    athlete_totals = Hash[athlete_totals]
+    top_score = athlete_totals.map { |a, weight| weight }.max
+
+    athlete_totals.select { |_, weight| top_score == weight }
+      .map{ |a, _| a }
+  end
+
   private
     def movements
       @type.movements
