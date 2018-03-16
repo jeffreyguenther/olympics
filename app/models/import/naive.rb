@@ -1,6 +1,6 @@
 class Import::Naive
   include Benchmarkable
-  
+
   def initialize(events: 1, athletes:, movements:)
     @events = events
     @duration  = 0
@@ -15,6 +15,7 @@ class Import::Naive
 
         event = build_event(event_data.type)
         event.attempts << build_records_for_performances(event_data.performances)
+        event.winners << build_winners(event_data)
         event.save
       end
     end
@@ -27,6 +28,10 @@ class Import::Naive
 
     def build_event(type)
       Event.new(kinds: type)
+    end
+
+    def build_winners(event_data)
+      event_data.winners.map { |w| w.id }.map { |id| Winner.new(athlete_id: id)  }
     end
 
     def build_records_for_performances(performances)
