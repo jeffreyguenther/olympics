@@ -8,6 +8,11 @@ class Generator::RowingEvent < Generator::DistanceEvent
     movement = movement_for_distance(distance)
 
     result = Generator::RowResult.new(distance: distance)
-    Generator::AthletePerformance.new(athlete: athlete, movement: movement, results: [result])
+    Generator::AthletePerformance.new(
+      athlete: athlete,
+      movement: movement,
+      score: result.score,
+      results: [result]
+    )
   end
 end
