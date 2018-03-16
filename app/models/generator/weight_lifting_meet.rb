@@ -16,7 +16,7 @@ class Generator::WeightLiftingMeet
       athlete_performances = @athletes.map do |athlete|
         movements.map do |movement|
           result = Generator::LiftPerformance.new(starting_weight: athlete.opening_weight(@type, movement))
-          athlete.update_records_for(movement, result)
+          athlete.update_records_for(movement, result.best_weight)
 
           Generator::AthletePerformance.new(athlete: athlete, movement: movement, results: result.results)
         end
