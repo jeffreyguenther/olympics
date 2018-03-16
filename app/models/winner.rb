@@ -22,4 +22,6 @@
 #
 
 class Winner < ApplicationRecord
+  belongs_to :event
+  belongs_to :athlete
 end
