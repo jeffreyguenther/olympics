@@ -19,7 +19,7 @@ class WeightLiftingMeetTest < ActiveSupport::TestCase
 
     meet = Generator::WeightLiftingMeet.new(type: Generator::PowerliftingMeet, athletes: athletes)
     results = meet.results
-    
+
     assert_equal 6, results.count
   end
 end
