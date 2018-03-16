@@ -6,11 +6,16 @@ class Generator::Event
   def initialize(athletes:, type: nil)
     @athletes = athletes
     @type = type || generate_event_type
-    @performances = generate_performances(@type)
+    @event = generate_event(@type)
+    @performances = @event.results
+  end
+
+  def winners
+    @event.winners
   end
 
   private
-    def generate_performances(type)
+    def generate_event(type)
       case type
       when 0
         generate_olympic_event
@@ -24,25 +29,25 @@ class Generator::Event
     end
 
     def generate_run_event
-      Generator::RunningEvent.new(athletes: @athletes).results
+      Generator::RunningEvent.new(athletes: @athletes)
     end
 
     def generate_row_event
-      Generator::RowingEvent.new(athletes: @athletes).results
+      Generator::RowingEvent.new(athletes: @athletes)
     end
 
     def generate_olympic_event
       Generator::WeightLiftingMeet.new(
         type: Generator::OlympicMeet,
         athletes: @athletes
-      ).results
+      )
     end
 
     def generate_powerlifting_event
       Generator::WeightLiftingMeet.new(
         type: Generator::PowerliftingMeet,
         athletes: @athletes
-      ).results
+      )
     end
 
     def generate_event_type

@@ -54,4 +54,13 @@ class EventTest < ActiveSupport::TestCase
 
     assert_equal athletes.count, event.performances.count
   end
+
+  test "#winners" do
+    jim = Import::AthleteWithRecords.new(Athlete.create(name: "Jim"))
+    bob = Import::AthleteWithRecords.new(Athlete.create(name: "Bob"))
+    athletes = [jim, bob]
+    event = Generator::Event.new(athletes: athletes, type: 3)
+
+    assert event.winners.count >= 1
+  end
 end
