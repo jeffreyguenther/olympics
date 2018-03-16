@@ -16,9 +16,7 @@ class Import::AthleteWithRecords
     end
   end
 
-  def update_records_for(movement, performance)
-    performance_max = performance.best_weight
-
+  def update_records_for(movement, performance_max)
     current_max = @records[movement]
     if current_max.blank? || current_max < performance_max
       @records[movement] = performance_max
