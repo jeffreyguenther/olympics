@@ -1,6 +1,13 @@
 class Import::CopyFromInMemory
   include Benchmarkable
 
+  WINNERS_COLUMNS = ["event_id", "athlete_id", "created_at", "updated_at"]
+  ATTEMPTS_COLUMNS = [
+    "result", "attempt", "athlete_id",
+    "movement_id", "created_at",
+    "updated_at", "event_id", "success"
+  ]
+
   def initialize(events: 1, athletes:, movements:)
     @events = events
     @duration  = 0
@@ -39,7 +46,7 @@ class Import::CopyFromInMemory
     def stream_winners(event, winners)
       columns = ["event_id", "athlete_id", "created_at", "updated_at"]
       winners.each do |w|
-        stream_data_via_copy("winners", columns, [event.id, w.id, Time.now.to_s, Time.now.to_s])
+        stream_data_via_copy("winners", WINNERS_COLUMNS, [event.id, w.id, Time.now.to_s, Time.now.to_s])
       end
     end
 
@@ -48,6 +55,7 @@ class Import::CopyFromInMemory
       data = [attempt.score, attempt.attempt, athlete.id, @movement_ids[movement],
           Time.now.to_s, Time.now.to_s, event.id, attempt.success?
         ]
+      stream_data_via_copy("attempts", ATTEMPTS_COLUMNS, data)
     end
 
     def stream_data_via_copy(table, columns, data)

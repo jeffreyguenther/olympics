@@ -18,6 +18,7 @@
 
 .byebug_history
 attempts.csv
+winners.csv
 /public/packs
 /public/packs-test
 /node_modules

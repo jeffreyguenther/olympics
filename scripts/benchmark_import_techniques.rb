@@ -26,6 +26,7 @@ benchmarks = [
 ]
 
 def clear_db
+  Winner.delete_all
   Event.delete_all
   Attempt.delete_all
 end
