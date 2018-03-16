@@ -13,6 +13,13 @@ class Generator::DistanceEvent
     @results = results || generate_athlete_performances
   end
 
+  def winners
+    fastest_time = results.map { |r| r.score }.min
+
+    results.select { |r| r.score == fastest_time }
+      .map { |winner| winner.athlete  }
+  end
+
   protected
     def generate_performance(distance, athlete)
       raise NotImplementedError
