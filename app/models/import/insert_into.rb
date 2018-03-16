@@ -8,6 +8,7 @@ class Import::InsertInto < Import::Naive
 
         event = build_event(event_data.type)
         event.attempts << build_records_for_performances(event_data.performances)
+        event.winners << build_winners(event_data)
 
         event
       end
