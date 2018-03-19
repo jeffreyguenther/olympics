@@ -26,7 +26,9 @@ class Winner < ApplicationRecord
   belongs_to :athlete
 
   def self.wins_per_athlete
-    group(:athlete_id).count
+    includes(:athlete).select(:athlete_id)
+    .group(:athlete_id)
+    .count
   end
 
   def self.standings

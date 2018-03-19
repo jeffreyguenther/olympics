@@ -7,5 +7,10 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
 import "src/application.css"
+import BarChart from "charts/bar_chart"
+
+document.addEventListener("turbolinks:load", function (){
+  let b = new BarChart("/stats/summary/athlete_event_wins.json");
+  b.render();
+})
