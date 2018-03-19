@@ -5056,6 +5056,10 @@ pumpify@^1.3.3:
     inherits "^2.0.3"
     pump "^2.0.0"
 
+punchbox-js@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/punchbox-js/-/punchbox-js-0.1.0.tgz#0a147a0ee6c40bb50281928a62b34444aa23df59"
+
 punycode@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"

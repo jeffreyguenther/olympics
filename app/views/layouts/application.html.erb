@@ -11,7 +11,7 @@
     <%= stylesheet_pack_tag 'application' %>
   </head>
 
-  <body class="bg-grey-lightest">
+  <body <%= punchbox_attributes %> class="bg-grey-lightest">
     <nav class="bg-black py-2">
       <%= link_to root_path, class: "no-underline" do %>
         <h1 class="text-white text-center">Olympics</h1>
