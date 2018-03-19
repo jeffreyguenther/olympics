@@ -40,7 +40,7 @@ export default class BarChart {
       g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
-          .attr("class", "text-blue fill-current")
+          .attr("class", "text-teal-dark fill-current")
           .attr("x", function(d) { return x(d.name); })
           .attr("y", function(d) { return y(d.count); })
           .attr("width", x.bandwidth())
