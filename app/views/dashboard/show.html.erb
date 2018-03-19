@@ -10,7 +10,7 @@
   <% @athletes.each do |athlete| %>
     <%= link_to athlete_path(athlete), class: "flex-grow no-underline text-black" do %>
       <div class="flex items-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-        <%= image_tag "albert-dera-397063-unsplash.jpg", class: "w-8 h-8 rounded-full mr-2" %>
+        <%= image_tag avatar_for(athlete), class: "w-8 h-8 rounded-full border-2 border-solid border-grey mr-2" %>
         <h3 class="font-light"><%= athlete.name %></h3>
       </div>
     <% end %>
@@ -23,6 +23,7 @@
     <svg width="500" height="500"></svg>
   </div>
   <div class="w-1/2">
+    <svg width="500" height="500"></svg>
     Bar Chart showing the event type distribution
   </div>
 </div>

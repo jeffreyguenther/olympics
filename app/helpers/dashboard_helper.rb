@@ -8,4 +8,17 @@ module DashboardHelper
       "🏋️‍♂️"
     end
   end
+
+  def avatar_for(athlete)
+    case athlete.name
+    when "Sam Strong"
+      "chris.jpg"
+    when "Wally Wobbles"
+      "albert.jpg"
+    when "Junior Jumps"
+      "hunter.jpg"
+    when "Peter Power"
+      "sankey.jpg"
+    end
+  end
 end
