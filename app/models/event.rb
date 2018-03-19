@@ -15,7 +15,7 @@ class Event < ApplicationRecord
   has_many :winners
   has_many :winning_athletes, through: :winners, source: :athlete
 
-  def self.distribution_of_events
+  def self.distribution
     Event.group(:kinds).count
   end
 end

@@ -2,7 +2,8 @@
   "name": "olympics",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.3.0"
+    "@rails/webpacker": "^3.3.0",
+    "d3": "^4.13.0"
   },
   "devDependencies": {
     "postcss-cssnext": "^3.1.0",

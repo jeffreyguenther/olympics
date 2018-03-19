@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316212602) do
+ActiveRecord::Schema.define(version: 20180319193820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20180316212602) do
     t.integer "attempt"
     t.index ["athlete_id"], name: "index_attempts_on_athlete_id"
     t.index ["event_id"], name: "index_attempts_on_event_id"
+    t.index ["movement_id", "result"], name: "index_attempts_on_movement_id_and_result"
     t.index ["movement_id"], name: "index_attempts_on_movement_id"
     t.index ["result"], name: "index_attempts_on_result"
   end

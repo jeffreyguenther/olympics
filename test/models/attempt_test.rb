@@ -14,10 +14,11 @@
 #
 # Indexes
 #
-#  index_attempts_on_athlete_id   (athlete_id)
-#  index_attempts_on_event_id     (event_id)
-#  index_attempts_on_movement_id  (movement_id)
-#  index_attempts_on_result       (result)
+#  index_attempts_on_athlete_id              (athlete_id)
+#  index_attempts_on_event_id                (event_id)
+#  index_attempts_on_movement_id             (movement_id)
+#  index_attempts_on_movement_id_and_result  (movement_id,result)
+#  index_attempts_on_result                  (result)
 #
 
 require 'test_helper'

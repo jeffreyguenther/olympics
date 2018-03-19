@@ -24,4 +24,18 @@
 class Winner < ApplicationRecord
   belongs_to :event
   belongs_to :athlete
+
+  def self.wins_per_athlete
+    group(:athlete_id).count
+  end
+
+  def self.standings
+    includes(:athlete).select(:athlete_id)
+      .group(:athlete_id)
+      .order("count(athlete_id) DESC")
+  end
+
+  def self.overall
+    standings.first.athlete
+  end
 end
