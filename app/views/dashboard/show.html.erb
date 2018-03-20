@@ -54,32 +54,35 @@
 
 <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Olympic Lifting</h2>
 <div class="flex flex-row flex-wrap items-baseline bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-  Olymic lifting summary
 
   <div class="flex">
-    <div class="w-1/2">
-      Bar Char showing each athletes top performance for snatch
-    </div>
-    <div class="w-1/2">
-      Bar Char showing each athletes top performance for clea and jerk
-    </div>
+    <% Movement.olympic_lifts.each do |m| %>
+      <div class="w-1/2">
+        <svg data-viz="bar-chart"
+            data-url="<%= stats_movement_maximum_path(m, format: :json) %>"
+            data-x-axis-label="<%= m.name.capitalize %>"
+            data-y-axis-label="Pounds"
+            data-bar-color="text-teal-dark"
+            width="500" height="500"></svg>
+      </div>
+    <% end %>
   </div>
 </div>
 
 <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Powerlifting Lifting</h2>
 <div class="flex flex-row flex-wrap items-baseline bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-  Olymic lifting summary
 
-  <div class="flex">
-    <div class="">
-      Bar Char showing each athletes top performance for deadlift
-    </div>
-    <div class="">
-      Bar Char showing each athletes top performance for bench
-    </div>
-    <div class="">
-      Bar Char showing each athletes top performance for squat
-    </div>
+  <div class="flex content-between">
+    <% Movement.powerlifts.each do |m| %>
+      <div class="">
+        <svg data-viz="bar-chart"
+            data-url="<%= stats_movement_maximum_path(m, format: :json) %>"
+            data-x-axis-label="<%= m.name.capitalize %>"
+            data-y-axis-label="Pounds"
+            data-bar-color="text-teal-dark"
+            width="350" height="500"></svg>
+      </div>
+    <% end %>
   </div>
 </div>
 

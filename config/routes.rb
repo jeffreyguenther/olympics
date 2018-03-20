@@ -10,6 +10,6 @@ Rails.application.routes.draw do
       resource :event_distribution, controller: "event_distribution", only: :show
     end
 
-    # resources :movements, only: :show
+    resources :movement_maximums, only: :show
   end
 end

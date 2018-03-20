@@ -27,7 +27,13 @@ export default class BarChart {
       g.append("g")
           .attr("class", "axis axis--x")
           .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+          .call(d3.axisBottom(x))
+        .append("text")
+          .attr("class", "text-black font-bold fill-current")
+          .attr("y", 20)
+          .attr("x", width / 2)
+          .attr("dy", "0.71em")
+          .text(this.config.xAxisLabel);
 
       g.append("g")
           .attr("class", "axis axis--y")

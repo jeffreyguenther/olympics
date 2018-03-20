@@ -19,7 +19,4 @@ document.addEventListener("turbolinks:load", function (){
     let b = new BarChart(chartElement, config);
     b.render();
   }
-  // Load GroupedBarCharts
-
-  // Load
 })

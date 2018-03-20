@@ -11,6 +11,14 @@
 class Movement < ApplicationRecord
   has_many :attempts
 
+  def self.olympic_lifts
+    where(name: Generator::OlympicMeet.movements)
+  end
+
+  def self.powerlifts
+    where(name: Generator::PowerliftingMeet.movements)
+  end
+
   def top_performance_by_max
     attempts.succeeded.maximum(:result)
   end
@@ -33,6 +41,7 @@ class Movement < ApplicationRecord
     else
       result = top_performance_by_max
     end
+
     Athlete.joins(:attempts).where(attempts: {movement: self, success: true, result: result}).distinct
   end
 
