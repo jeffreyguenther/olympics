@@ -9,8 +9,17 @@
 
 import "src/application.css"
 import BarChart from "charts/bar_chart"
+import BarChartConfig from "charts/bar_chart_config"
 
 document.addEventListener("turbolinks:load", function (){
-  let b = new BarChart("/stats/summary/athlete_event_wins.json");
-  b.render();
+
+  let barCharts = document.querySelectorAll("[data-viz='bar-chart']")
+  for (var chartElement of barCharts) {
+    let config = BarChartConfig.from(chartElement)
+    let b = new BarChart(chartElement, config);
+    b.render();
+  }
+  // Load GroupedBarCharts
+
+  // Load
 })

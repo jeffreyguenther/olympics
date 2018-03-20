@@ -1,6 +1,6 @@
 class Stats::Summary::AthleteEventWinsController < ApplicationController
 
-  def index
+  def show
     @wins = wins_per_athlete
   end
 

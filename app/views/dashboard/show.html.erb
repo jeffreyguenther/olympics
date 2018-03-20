@@ -20,11 +20,20 @@
 <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Competition Overview</h2>
 <div class="flex flex-row flex-wrap items-baseline bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
   <div class="w-1/2">
-    <svg width="500" height="500"></svg>
+    <svg data-viz="bar-chart"
+        data-url="/stats/summary/athlete_event_wins.json"
+        data-x-axis-label = ""
+        data-y-axis-label = "Wins"
+        data-bar-color = "text-teal-dark"
+        width="500" height="500"></svg>
   </div>
   <div class="w-1/2">
-    <svg width="500" height="500"></svg>
-    Bar Chart showing the event type distribution
+    <svg data-viz="bar-chart"
+        data-url="/stats/summary/event_distribution.json"
+        data-x-axis-label = ""
+        data-y-axis-label = "Events"
+        data-bar-color = "text-teal-dark"
+        width="500" height="500"></svg>
   </div>
 </div>
 

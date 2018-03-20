@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   namespace :stats do
     namespace :summary do
-      resources :athlete_event_wins, only: :index
+      resource :athlete_event_wins, only: :show
+      resource :event_distribution, controller: "event_distribution", only: :show
     end
+
+    # resources :movements, only: :show
   end
 end
