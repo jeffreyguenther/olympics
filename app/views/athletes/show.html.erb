@@ -7,34 +7,43 @@
   </div>
   <hr class="w-3/5 border-solid border-grey-light border my-4">
 
-  <div class="flex">
-    <div class="">
-      <ul>
+  <div class="flex justify-center my-8">
+    <table class="w-1/2">
+      <thead class="text-xl">
+        <th>Movement</th>
+        <th>Result</th>
+      </thead>
+      <tbody>
         <% @athlete.personal_records.each_pair do |movement, result| %>
-          <li><%= movement.capitalize %>: <%= result %></li>
+          <tr>
+            <td><%= movement.capitalize%></td>
+            <td><%= result %></td>
+          </tr>
         <% end %>
-      </ul>
-    </div>
+
+      </tbody>
+    </table>
   </div>
 </div>
 
 
-  <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Attempt Summary</h2>
-  <div class="flex justify-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-    <svg data-viz="grouped-bar-chart"
-        data-url="<%= stats_lift_successes_and_failure_path(@athlete, format: :json) %>"
-        data-x-axis-label=""
-        data-y-axis-label="Attempts"
-        data-bar-colors=""
-        data-legend-items=""
-        width="1000" height="500"></svg>
-  </div>
+<h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Attempt Summary</h2>
+<div class="flex justify-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+  <svg data-viz="grouped-bar-chart"
+      data-url="<%= stats_lift_successes_and_failure_path(@athlete, format: :json) %>"
+      data-x-axis-label=""
+      data-y-axis-label="Attempts"
+      data-bar-colors=""
+      data-legend-items=""
+      width="1000" height="500"></svg>
+</div>
 
-  <div class="w-full">
-    Line chart showing running performance over time.
-  </div>
+<h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Running Performance</h2>
+<div class="bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+  Line chart showing running performance over time.
+</div>
 
-  <div class="w-full">
-    Line chart showing rowing performance over time
-  </div>
+<h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Rowing Performance</h2>
+<div class="bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+  Line chart showing rowing performance over time
 </div>

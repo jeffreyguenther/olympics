@@ -57,6 +57,15 @@
  */
 
  table, th, td {
-    /* border: 1px solid black; */
-    border-collapse: collapse;
+   @apply .border-b .border-grey-darker .border-solid;
+   border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+  @apply .bg-grey-light;
 }
