@@ -1,3 +1,6 @@
+import * as d3 from "d3";
+import * as c3 from "d3-scale-chromatic"
+
 export default class GroupedBarChart {
   constructor(element, config) {
     this.element = element;
@@ -8,7 +11,7 @@ export default class GroupedBarChart {
     var svg = d3.select("svg");
     svg.selectAll("*").remove();
 
-    let margin = {top: 20, right: 20, bottom: 30, left: 40};
+    let margin = {top: 20, right: 130, bottom: 30, left: 40};
     let width = +svg.attr("width") - margin.left - margin.right;
     let height = +svg.attr("height") - margin.top - margin.bottom;
     let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -23,14 +26,17 @@ export default class GroupedBarChart {
     var y = d3.scaleLinear()
         .rangeRound([height, 0]);
 
-    var colors = d3.scaleOrdinal()
-        .range(this.config.barColors);
+    var colors;
+    if (this.config.barColors != ""){
+      colors = d3.scaleOrdinal().range(this.config.barColors);
+    }else {
+      colors = d3.scaleOrdinal(c3.schemePaired);
+    }
 
     d3.json(this.config.url, (data) => {
-      // var keys = data.columns.slice(1);
-      var keys = Object.keys(data[0])
+      var keys = Object.keys(data[0]).slice(1)
 
-      x0.domain(data.map(function(d) { return d.State; }));
+      x0.domain(data.map(function(d) { return d.group; }));
       x1.domain(keys).rangeRound([0, x0.bandwidth()]);
       y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
 
@@ -38,7 +44,7 @@ export default class GroupedBarChart {
         .selectAll("g")
         .data(data)
         .enter().append("g")
-          .attr("transform", function(d) { return "translate(" + x0(d.State) + ",0)"; })
+          .attr("transform", function(d) { return "translate(" + x0(d.group) + ",0)"; })
         .selectAll("rect")
         .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
         .enter().append("rect")
@@ -55,7 +61,7 @@ export default class GroupedBarChart {
 
       g.append("g")
           .attr("class", "axis")
-          .call(d3.axisLeft(y).ticks(null, "s"))
+          .call(d3.axisLeft(y))
         .append("text")
           .attr("x", 2)
           .attr("y", y(y.ticks().pop()) + 0.5)
@@ -66,13 +72,14 @@ export default class GroupedBarChart {
           .text(this.config.yAxisLabel);
 
       var legend = g.append("g")
+          .attr("transform", "translate(" + [margin.right, height - 10] + ")")
           .attr("font-family", "sans-serif")
           .attr("font-size", 10)
           .attr("text-anchor", "end")
         .selectAll("g")
-        .data(keys.slice().reverse())
+        .data(keys.slice())
         .enter().append("g")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+          .attr("transform", function(d, i) { return "translate(0," + i * -20 + ")"; });
 
       legend.append("rect")
           .attr("x", width - 19)

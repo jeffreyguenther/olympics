@@ -1332,7 +1332,11 @@ combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2, commander@^2.11.0, commander@^2.9.0:
+commander@2:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
+
+commander@^2.11.0, commander@^2.9.0:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
 
@@ -1771,6 +1775,13 @@ d3-request@1.0.6:
     d3-dispatch "1"
     d3-dsv "1"
     xmlhttprequest "1"
+
+d3-scale-chromatic@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/d3-scale-chromatic/-/d3-scale-chromatic-1.2.0.tgz#25820d059c0eccc33e85f77561f37382a817ab58"
+  dependencies:
+    d3-color "1"
+    d3-interpolate "1"
 
 d3-scale@1.0.7:
   version "1.0.7"

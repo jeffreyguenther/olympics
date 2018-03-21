@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "^3.3.0",
     "d3": "^4.13.0",
+    "d3-scale-chromatic": "^1.2.0",
     "punchbox-js": "^0.1.0"
   },
   "devDependencies": {

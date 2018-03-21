@@ -10,6 +10,8 @@
 import "src/application.css"
 import BarChart from "charts/bar_chart"
 import BarChartConfig from "charts/bar_chart_config"
+import GroupedBarChart from "charts/grouped_bar_chart"
+import GroupedBarChartConfig from "charts/grouped_bar_chart_config"
 
 document.addEventListener("turbolinks:load", function (){
 
@@ -17,6 +19,13 @@ document.addEventListener("turbolinks:load", function (){
   for (var chartElement of barCharts) {
     let config = BarChartConfig.from(chartElement)
     let b = new BarChart(chartElement, config);
+    b.render();
+  }
+
+  let groupedBarCharts = document.querySelectorAll("[data-viz='grouped-bar-chart']")
+  for (var chartElement of groupedBarCharts) {
+    let config = GroupedBarChartConfig.from(chartElement)
+    let b = new GroupedBarChart(chartElement, config);
     b.render();
   }
 })

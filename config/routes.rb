@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     end
 
     resources :movement_maximums, only: :show
+    resources :lift_successes_and_failures, only: :show
   end
 end

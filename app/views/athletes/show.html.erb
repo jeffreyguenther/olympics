@@ -1,5 +1,5 @@
 <div class="bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
-  <div class="flex justify-center">
+  <div class="flex justify-center mt-4">
     <%= image_tag avatar_for(@athlete), class: "w-32 h-32 rounded-full border-4 border-solid border-grey mr-2" %>
   </div>
   <div class="text-center text-5xl text-grey-darkest mt-4">
@@ -8,18 +8,26 @@
   <hr class="w-3/5 border-solid border-grey-light border my-4">
 
   <div class="flex">
-    <div class="w-1/2">
+    <div class="">
       <ul>
         <% @athlete.personal_records.each_pair do |movement, result| %>
           <li><%= movement.capitalize %>: <%= result %></li>
         <% end %>
       </ul>
     </div>
-    
-    <div class="w-1/2">
-      Bar Chart showing count of successes/failures per attempt per lifting
-      movement
-    </div>
+  </div>
+</div>
+
+
+  <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Attempt Summary</h2>
+  <div class="flex justify-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+    <svg data-viz="grouped-bar-chart"
+        data-url="<%= stats_lift_successes_and_failure_path(@athlete, format: :json) %>"
+        data-x-axis-label=""
+        data-y-axis-label="Attempts"
+        data-bar-colors=""
+        data-legend-items=""
+        width="1000" height="500"></svg>
   </div>
 
   <div class="w-full">

@@ -50,7 +50,7 @@ class Athlete < ApplicationRecord
   end
 
   def lift_successes_and_failures
-    Attempt.succeeded
+    Attempt
       .where(athlete: self)
       .group(:movement_id, :attempt, :success)
       .having("movement_id IN (?)", Movement::LIFT_IDS)
