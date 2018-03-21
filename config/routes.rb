@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     namespace :summary do
       resource :athlete_event_wins, only: :show
       resource :event_distribution, controller: "event_distribution", only: :show
+      resource :runs, only: :show
+      resource :rows, only: :show
     end
 
     resources :movement_maximums, only: :show
