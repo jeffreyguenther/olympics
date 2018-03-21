@@ -14,12 +14,20 @@ class Athlete < ApplicationRecord
   has_many :events_won, through: :winners, source: :event
 
   def personal_records
-    records = attempts.includes(:movement)
+    lifts = attempts.includes(:movement)
       .succeeded
       .select("MAX(result) as result, movement_id")
+      .where(attempts: {movement: Movement::LIFT_IDS})
       .group(:movement_id)
 
-    # Convert this to a union of the max results lifts and the min results for runs
+    runs_rows = attempts.includes(:movement)
+      .succeeded
+      .select("min(result) as result, movement_id")
+      .where(attempts: {movement: Movement::RUN_ROW_IDS})
+      .group(:movement_id)
+
+    records = lifts.to_a + runs_rows.to_a
+
     Hash[records.map { |r| [r.movement.name, r.result] }]
   end
 
@@ -27,7 +35,7 @@ class Athlete < ApplicationRecord
     Attempt.succeeded
       .where(athlete: self)
       .group(:movement_id, :attempt)
-      .having("movement_id IN (?)", 7..11)
+      .having("movement_id IN (?)", Movement::LIFT_IDS)
       .order(:movement_id, :attempt)
       .count
   end
@@ -36,10 +44,17 @@ class Athlete < ApplicationRecord
     Attempt.failed
       .where(athlete: self)
       .group(:movement_id, :attempt)
-      .having("movement_id IN (?)", 7..11)
+      .having("movement_id IN (?)", Movement::LIFT_IDS)
       .order(:movement_id, :attempt)
       .count
   end
 
-  # Attempt.succeeded.where(athlete: Athlete.first).group(:movement_id, :attempt).having("movement_id IN (?)", 7..11).order(:movement_id, :attempt).count
+  def lift_successes_and_failures
+    Attempt.succeeded
+      .where(athlete: self)
+      .group(:movement_id, :attempt, :success)
+      .having("movement_id IN (?)", Movement::LIFT_IDS)
+      .order(:movement_id, :attempt)
+      .count
+  end
 end

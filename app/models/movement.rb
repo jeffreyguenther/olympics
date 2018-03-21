@@ -9,6 +9,9 @@
 #
 
 class Movement < ApplicationRecord
+  RUN_ROW_IDS = (1..6).to_a
+  LIFT_IDS = (7..11).to_a
+
   has_many :attempts
 
   def self.olympic_lifts
@@ -42,11 +45,14 @@ class Movement < ApplicationRecord
       result = top_performance_by_max
     end
 
-    Athlete.joins(:attempts).where(attempts: {movement: self, success: true, result: result}).distinct
+    Athlete.joins(:attempts)
+      .where(attempts: {movement: self, success: true, result: result})
+      .distinct
   end
 
   def athlete_top_performances
-    results = Attempt.includes(:athlete).select("#{min_max} as result, athlete_id")
+    results = Attempt.includes(:athlete)
+      .select("#{min_max} as result, athlete_id")
       .where(movement: self, success: true)
       .group(:athlete_id)
       .map { |a| [a.athlete, a.result] }
