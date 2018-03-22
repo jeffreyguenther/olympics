@@ -8,7 +8,7 @@ export default class GroupedBarChart {
   }
 
   render(){
-    var svg = d3.select("svg");
+    var svg = d3.select(this.element);
     svg.selectAll("*").remove();
 
     let margin = {top: 20, right: 130, bottom: 30, left: 40};

@@ -12,6 +12,8 @@ import BarChart from "charts/bar_chart"
 import BarChartConfig from "charts/bar_chart_config"
 import GroupedBarChart from "charts/grouped_bar_chart"
 import GroupedBarChartConfig from "charts/grouped_bar_chart_config"
+import MultiLineChart from "charts/multi_line_chart"
+import MultiLineChartConfig from "charts/multi_line_chart_config"
 
 document.addEventListener("turbolinks:load", function (){
 
@@ -26,6 +28,13 @@ document.addEventListener("turbolinks:load", function (){
   for (var chartElement of groupedBarCharts) {
     let config = GroupedBarChartConfig.from(chartElement)
     let b = new GroupedBarChart(chartElement, config);
+    b.render();
+  }
+
+  let multiLineCharts = document.querySelectorAll("[data-viz='multi-line-chart']")
+  for (var chartElement of multiLineCharts) {
+    let config = MultiLineChartConfig.from(chartElement)
+    let b = new MultiLineChart(chartElement, config);
     b.render();
   }
 })

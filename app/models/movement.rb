@@ -13,6 +13,7 @@ class Movement < ApplicationRecord
   LIFT_IDS = (7..11).to_a
 
   has_many :attempts
+  has_many :events, through: :attempts, source: :event
 
   def self.olympic_lifts
     where(name: Generator::OlympicMeet.movements)
@@ -20,6 +21,14 @@ class Movement < ApplicationRecord
 
   def self.powerlifts
     where(name: Generator::PowerliftingMeet.movements)
+  end
+
+  def self.runs
+    where("name ILIKE '%run'")
+  end
+
+  def self.rows
+    where("name ILIKE '%row'")
   end
 
   def top_performance_by_max

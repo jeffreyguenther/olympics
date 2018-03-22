@@ -57,7 +57,7 @@
  */
 
  table, th, td {
-   @apply .border-b .border-grey-darker .border-solid;
+   /* @apply .border-b .border-grey-lightest .border-solid; */
    border-collapse: collapse;
 }
 
@@ -67,5 +67,11 @@ th, td {
 }
 
 tr:nth-child(even) {
-  @apply .bg-grey-light;
+  @apply .bg-grey-lighter;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }

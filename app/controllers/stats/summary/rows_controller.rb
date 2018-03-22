@@ -1,6 +1,7 @@
 class Stats::Summary::RowsController < ApplicationController
 
   def show
-    @events = Event.distribution
+    @athletes = Athlete.all
+    @movement = Movement.find(params[:id])
   end
 end
