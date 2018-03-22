@@ -24,17 +24,23 @@ class Generator::DistanceResult
   end
 
   protected
+    # :nocov:
     def generate_500m_time(speed)
       raise NotImplementedError
     end
+    # :nocov:
 
+    # :nocov:
     def generate_1000m_time(speed)
       raise NotImplementedError
     end
+    # :nocov:
 
+    # :nocov:
     def generate_5000m_time(speed)
       raise NotImplementedError
     end
+    # :nocov:
 
   private
     def generate_time

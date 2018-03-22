@@ -21,17 +21,21 @@ class Generator::DistanceEvent
   end
 
   protected
+    # :nocov:
     def generate_performance(distance, athlete)
       raise NotImplementedError
     end
+    # :nocov:
 
     def movement_for_distance(distance)
       "#{distance}m #{movement_type}"
     end
 
+    # :nocov:
     def movement
       raise NotImplementedError
     end
+    # :nocov:
 
   private
     def generate_distance
