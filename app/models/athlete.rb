@@ -31,24 +31,6 @@ class Athlete < ApplicationRecord
     Hash[records.map { |r| [r.movement.name, r.result] }]
   end
 
-  def lift_successes
-    Attempt.succeeded
-      .where(athlete: self)
-      .group(:movement_id, :attempt)
-      .having("movement_id IN (?)", Movement::LIFT_IDS)
-      .order(:movement_id, :attempt)
-      .count
-  end
-
-  def lift_failures
-    Attempt.failed
-      .where(athlete: self)
-      .group(:movement_id, :attempt)
-      .having("movement_id IN (?)", Movement::LIFT_IDS)
-      .order(:movement_id, :attempt)
-      .count
-  end
-
   def lift_successes_and_failures
     Attempt
       .where(athlete: self)
