@@ -23,7 +23,7 @@
 
 FactoryBot.define do
   factory :winner do
-    event_id 1
-    athlete_id 1
+    event
+    athlete
   end
 end

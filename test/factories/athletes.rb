@@ -10,6 +10,6 @@
 
 FactoryBot.define do
   factory :athlete do
-    name "MyString"
+    name "Athlete"
   end
 end

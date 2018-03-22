@@ -23,8 +23,16 @@
 
 FactoryBot.define do
   factory :attempt do
-    weight 1
-    athlete_id 1
-    movement_id 1
+    result 100
+    movement
+    event
+
+    trait :fail do
+      success false
+    end
+
+    trait :success do
+      success true
+    end
   end
 end
