@@ -11,7 +11,16 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "distribution" do
+    create(:event, kinds: "power")
+    create(:event, kinds: "power")
+    create(:event, kinds: "olympic")
+    create(:event, kinds: "olympic")
+    create(:event, kinds: "olympic")
+
+    distribution = Event.distribution
+
+    assert_equal 2, distribution["power"]
+    assert_equal 3, distribution["olympic"]
+  end
 end
