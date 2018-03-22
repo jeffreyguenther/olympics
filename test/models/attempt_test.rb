@@ -24,7 +24,19 @@
 require 'test_helper'
 
 class AttemptTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "succeeded" do
+    success = create(:attempt, :success)
+    failure = create(:attempt, :fail)
+
+    assert_includes Attempt.succeeded, success
+    assert_not_includes Attempt.succeeded, failure
+  end
+
+  test "failed" do
+    success = create(:attempt, :success)
+    failure = create(:attempt, :fail)
+
+    assert_not_includes Attempt.failed, success
+    assert_includes Attempt.failed, failure
+  end
 end
