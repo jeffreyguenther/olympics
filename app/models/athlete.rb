@@ -17,13 +17,13 @@ class Athlete < ApplicationRecord
     lifts = attempts.includes(:movement)
       .succeeded
       .select("MAX(result) as result, movement_id")
-      .where(attempts: {movement: Movement::LIFT_IDS})
+      .where(attempts: {movement: Movement.olympic_lifts.union(Movement.powerlifts)})
       .group(:movement_id)
 
     runs_rows = attempts.includes(:movement)
       .succeeded
-      .select("min(result) as result, movement_id")
-      .where(attempts: {movement: Movement::RUN_ROW_IDS})
+      .select("MIN(result) as result, movement_id")
+      .where(attempts: {movement: Movement.runs.union(Movement.rows)})
       .group(:movement_id)
 
     records = lifts.to_a + runs_rows.to_a
@@ -35,7 +35,7 @@ class Athlete < ApplicationRecord
     Attempt
       .where(athlete: self)
       .group(:movement_id, :attempt, :success)
-      .having("movement_id IN (?)", Movement::LIFT_IDS)
+      .having(movement: Movement.olympic_lifts.union(Movement.powerlifts))
       .order(:movement_id, :attempt)
       .count
   end

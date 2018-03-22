@@ -27,6 +27,7 @@ FactoryBot.define do
     movement
     event
     athlete
+    attempt 0
 
     trait :fail do
       success false

@@ -9,9 +9,6 @@
 #
 
 class Movement < ApplicationRecord
-  RUN_ROW_IDS = (1..6).to_a
-  LIFT_IDS = (7..11).to_a
-
   has_many :attempts
   has_many :events, through: :attempts, source: :event
 
