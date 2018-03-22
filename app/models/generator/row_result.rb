@@ -26,7 +26,7 @@ class Generator::RowResult < Generator::DistanceResult
     def generate_5000m_time(speed)
       case speed
       when :slow
-          generate_run_time_between(22.minutes..25.minutes)
+        generate_run_time_between(22.minutes..25.minutes)
       when :medium
         generate_run_time_between(18.minutes..21.minutes + 59.seconds)
       when :fast
