@@ -40,4 +40,12 @@ class Winner < ApplicationRecord
   def self.overall
     standings.first.athlete
   end
+
+  def self.wins_per_athlete_per_event
+    includes(:athlete)
+    .select("winners.athlete_id, COUNT(*) as wins, events.kinds as event_kind")
+    .joins(:event)
+    .group("events.kinds, winners.athlete_id")
+    .order("events.kinds, winners.athlete_id")
+  end
 end

@@ -37,6 +37,17 @@
   </div>
 </div>
 
+<h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Event Win Distribution</h2>
+<div class="flex justify-center bg-white border-grey-light shadow hover:shadow-md border-solid border-1 rounded p-4 m-2">
+  <svg data-viz="grouped-bar-chart"
+      data-url="<%= stats_summary_athlete_wins_per_event_type_distribution_path(format: :json) %>"
+      data-x-axis-label=""
+      data-y-axis-label="Wins"
+      data-bar-colors=""
+      data-legend-items=""
+      width="1000" height="500"></svg>
+</div>
+
 <h2 class="text-sm font-medium text-grey-dark ml-2 mt-8">Movement Champions</h2>
 <div class="flex flex-row flex-wrap">
   <% @movements.each do |movement| %>

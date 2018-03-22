@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :stats do
     namespace :summary do
       resource :athlete_event_wins, only: :show
+      resource :athlete_wins_per_event_type_distribution, controller: "athlete_wins_per_event_type_distribution", only: :show
       resource :event_distribution, controller: "event_distribution", only: :show
       resources :runs, only: :show
       resources :rows, only: :show
