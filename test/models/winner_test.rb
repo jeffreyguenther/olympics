@@ -66,6 +66,9 @@ class WinnerTest < ActiveSupport::TestCase
     zero2 = create(:event, kinds: 0)
     create(:winner, event: zero2, athlete: bob)
 
+    zero3 = create(:event, kinds: 0)
+    create(:winner, event: zero3, athlete: bob)
+
     one = create(:event, kinds: 1)
     create(:winner, event: one, athlete: bob)
 
@@ -74,7 +77,7 @@ class WinnerTest < ActiveSupport::TestCase
     one_counts = distribution[1].group_by{|w| w.athlete }
 
     assert_equal 1, zero_counts[jim].first.wins
-    assert_equal 1, zero_counts[bob].first.wins
+    assert_equal 2, zero_counts[bob].first.wins
     assert_equal 1, one_counts[bob].first.wins
   end
 end
