@@ -47,5 +47,6 @@ class Winner < ApplicationRecord
     .joins(:event)
     .group("events.kinds, winners.athlete_id")
     .order("events.kinds, winners.athlete_id")
+    .group_by{|w| w.event_kind}
   end
 end
